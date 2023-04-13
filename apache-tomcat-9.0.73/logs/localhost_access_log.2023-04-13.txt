@@ -1,0 +1,16 @@
+127.0.0.1 - - [13/Apr/2023:14:28:12 +0100] "GET / HTTP/1.1" 200 11428
+127.0.0.1 - - [13/Apr/2023:14:28:12 +0100] "GET /tomcat.css HTTP/1.1" 200 5895
+127.0.0.1 - - [13/Apr/2023:14:28:12 +0100] "GET /tomcat.svg HTTP/1.1" 200 68761
+127.0.0.1 - - [13/Apr/2023:14:28:12 +0100] "GET /asf-logo-wide.svg HTTP/1.1" 200 27530
+127.0.0.1 - - [13/Apr/2023:14:28:12 +0100] "GET /bg-nav.png HTTP/1.1" 200 1401
+127.0.0.1 - - [13/Apr/2023:14:28:12 +0100] "GET /bg-middle.png HTTP/1.1" 200 1918
+127.0.0.1 - - [13/Apr/2023:14:28:12 +0100] "GET /bg-button.png HTTP/1.1" 200 713
+127.0.0.1 - - [13/Apr/2023:14:28:12 +0100] "GET /bg-upper.png HTTP/1.1" 200 3103
+127.0.0.1 - - [13/Apr/2023:14:28:14 +0100] "GET /examples/ HTTP/1.1" 200 1156
+127.0.0.1 - - [13/Apr/2023:14:28:16 +0100] "GET /examples/servlets HTTP/1.1" 302 -
+127.0.0.1 - - [13/Apr/2023:14:28:16 +0100] "GET /examples/servlets/ HTTP/1.1" 200 6789
+127.0.0.1 - - [13/Apr/2023:14:28:16 +0100] "GET /examples/servlets/images/execute.gif HTTP/1.1" 200 1242
+127.0.0.1 - - [13/Apr/2023:14:28:16 +0100] "GET /examples/servlets/images/return.gif HTTP/1.1" 200 1231
+127.0.0.1 - - [13/Apr/2023:14:28:16 +0100] "GET /examples/servlets/images/code.gif HTTP/1.1" 200 292
+127.0.0.1 - - [13/Apr/2023:14:28:18 +0100] "GET /examples/servlets/helloworld.html HTTP/1.1" 200 2612
+127.0.0.1 - - [13/Apr/2023:14:30:15 +0100] "GET /myApp HTTP/1.1" 404 756

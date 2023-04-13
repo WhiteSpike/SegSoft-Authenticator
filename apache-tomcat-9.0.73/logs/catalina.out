@@ -1,0 +1,67 @@
+NOTE: Picked up JDK_JAVA_OPTIONS:  --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.io=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.util.concurrent=ALL-UNNAMED --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+usage: java org.apache.catalina.startup.Catalina [ -config {pathname} ] [ -nonaming ] [ -generateCode [ {pathname} ] ] [ -useGeneratedCode ] { -help | start | stop }
+13-Apr-2023 14:28:02.994 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version name:   Apache Tomcat/9.0.73
+13-Apr-2023 14:28:03.005 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Feb 27 2023 15:33:40 UTC
+13-Apr-2023 14:28:03.006 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version number: 9.0.73.0
+13-Apr-2023 14:28:03.006 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Linux
+13-Apr-2023 14:28:03.007 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            5.15.0-67-generic
+13-Apr-2023 14:28:03.007 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          amd64
+13-Apr-2023 14:28:03.008 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home:             /usr/lib/jvm/java-17-openjdk-amd64
+13-Apr-2023 14:28:03.008 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           17.0.6+10-Ubuntu-0ubuntu120.04.1
+13-Apr-2023 14:28:03.008 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Private Build
+13-Apr-2023 14:28:03.009 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         /home/whitespike/Desktop/Trabalhos FCT/Segurança de Software/apache-tomcat-9.0.73
+13-Apr-2023 14:28:03.009 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         /home/whitespike/Desktop/Trabalhos FCT/Segurança de Software/apache-tomcat-9.0.73
+13-Apr-2023 14:28:03.031 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.lang=ALL-UNNAMED
+13-Apr-2023 14:28:03.031 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.io=ALL-UNNAMED
+13-Apr-2023 14:28:03.031 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.util=ALL-UNNAMED
+13-Apr-2023 14:28:03.032 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.util.concurrent=ALL-UNNAMED
+13-Apr-2023 14:28:03.032 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+13-Apr-2023 14:28:03.032 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=/home/whitespike/Desktop/Trabalhos FCT/Segurança de Software/apache-tomcat-9.0.73/conf/logging.properties
+13-Apr-2023 14:28:03.032 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+13-Apr-2023 14:28:03.033 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djdk.tls.ephemeralDHKeySize=2048
+13-Apr-2023 14:28:03.033 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.protocol.handler.pkgs=org.apache.catalina.webresources
+13-Apr-2023 14:28:03.033 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dorg.apache.catalina.security.SecurityListener.UMASK=0027
+13-Apr-2023 14:28:03.034 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dignore.endorsed.dirs=
+13-Apr-2023 14:28:03.034 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=/home/whitespike/Desktop/Trabalhos FCT/Segurança de Software/apache-tomcat-9.0.73
+13-Apr-2023 14:28:03.034 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=/home/whitespike/Desktop/Trabalhos FCT/Segurança de Software/apache-tomcat-9.0.73
+13-Apr-2023 14:28:03.034 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=/home/whitespike/Desktop/Trabalhos FCT/Segurança de Software/apache-tomcat-9.0.73/temp
+13-Apr-2023 14:28:03.037 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent The Apache Tomcat Native library which allows using OpenSSL was not found on the java.library.path: [/usr/java/packages/lib:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib]
+13-Apr-2023 14:28:03.632 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-nio-8080"]
+13-Apr-2023 14:28:03.679 INFO [main] org.apache.catalina.startup.Catalina.load Server initialization in [1095] milliseconds
+13-Apr-2023 14:28:03.760 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service [Catalina]
+13-Apr-2023 14:28:03.761 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet engine: [Apache Tomcat/9.0.73]
+13-Apr-2023 14:28:03.776 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/whitespike/Desktop/Trabalhos FCT/Segurança de Software/apache-tomcat-9.0.73/webapps/manager]
+13-Apr-2023 14:28:04.444 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/whitespike/Desktop/Trabalhos FCT/Segurança de Software/apache-tomcat-9.0.73/webapps/manager] has finished in [667] ms
+13-Apr-2023 14:28:04.445 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/whitespike/Desktop/Trabalhos FCT/Segurança de Software/apache-tomcat-9.0.73/webapps/ROOT]
+13-Apr-2023 14:28:04.495 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/whitespike/Desktop/Trabalhos FCT/Segurança de Software/apache-tomcat-9.0.73/webapps/ROOT] has finished in [50] ms
+13-Apr-2023 14:28:04.496 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/whitespike/Desktop/Trabalhos FCT/Segurança de Software/apache-tomcat-9.0.73/webapps/host-manager]
+13-Apr-2023 14:28:04.558 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/whitespike/Desktop/Trabalhos FCT/Segurança de Software/apache-tomcat-9.0.73/webapps/host-manager] has finished in [61] ms
+13-Apr-2023 14:28:04.558 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/whitespike/Desktop/Trabalhos FCT/Segurança de Software/apache-tomcat-9.0.73/webapps/examples]
+13-Apr-2023 14:28:05.115 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/whitespike/Desktop/Trabalhos FCT/Segurança de Software/apache-tomcat-9.0.73/webapps/examples] has finished in [557] ms
+13-Apr-2023 14:28:05.117 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/whitespike/Desktop/Trabalhos FCT/Segurança de Software/apache-tomcat-9.0.73/webapps/docs]
+13-Apr-2023 14:28:05.193 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/whitespike/Desktop/Trabalhos FCT/Segurança de Software/apache-tomcat-9.0.73/webapps/docs] has finished in [75] ms
+13-Apr-2023 14:28:05.208 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8080"]
+13-Apr-2023 14:28:05.261 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in [1580] milliseconds
+13-Apr-2023 14:31:45.271 INFO [Catalina-utility-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/whitespike/Desktop/Trabalhos FCT/Segurança de Software/apache-tomcat-9.0.73/webapps/myApp]
+13-Apr-2023 14:31:45.330 INFO [Catalina-utility-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/whitespike/Desktop/Trabalhos FCT/Segurança de Software/apache-tomcat-9.0.73/webapps/myApp] has finished in [59] ms
+13-Apr-2023 14:53:05.603 INFO [Catalina-utility-1] org.apache.catalina.startup.HostConfig.reload Reloading context []
+13-Apr-2023 14:53:05.604 INFO [Catalina-utility-1] org.apache.catalina.core.StandardContext.reload Reloading Context with name [] has started
+13-Apr-2023 14:53:05.718 INFO [Catalina-utility-1] org.apache.catalina.core.StandardContext.reload Reloading Context with name [] is completed
+13-Apr-2023 14:53:05.719 INFO [Catalina-utility-1] org.apache.catalina.startup.HostConfig.reload Reloading context [/examples]
+13-Apr-2023 14:53:05.719 INFO [Catalina-utility-1] org.apache.catalina.core.StandardContext.reload Reloading Context with name [/examples] has started
+13-Apr-2023 14:53:06.199 INFO [Catalina-utility-1] org.apache.catalina.core.StandardContext.reload Reloading Context with name [/examples] is completed
+13-Apr-2023 14:53:06.200 INFO [Catalina-utility-1] org.apache.catalina.startup.HostConfig.reload Reloading context [/host-manager]
+13-Apr-2023 14:53:06.200 INFO [Catalina-utility-1] org.apache.catalina.core.StandardContext.reload Reloading Context with name [/host-manager] has started
+13-Apr-2023 14:53:06.252 INFO [Catalina-utility-1] org.apache.catalina.core.StandardContext.reload Reloading Context with name [/host-manager] is completed
+13-Apr-2023 14:53:06.252 INFO [Catalina-utility-1] org.apache.catalina.startup.HostConfig.reload Reloading context [/myApp]
+13-Apr-2023 14:53:06.253 INFO [Catalina-utility-1] org.apache.catalina.core.StandardContext.reload Reloading Context with name [/myApp] has started
+13-Apr-2023 14:53:06.308 INFO [Catalina-utility-1] org.apache.catalina.core.StandardContext.reload Reloading Context with name [/myApp] is completed
+13-Apr-2023 14:53:06.308 INFO [Catalina-utility-1] org.apache.catalina.startup.HostConfig.reload Reloading context [/manager]
+13-Apr-2023 14:53:06.309 INFO [Catalina-utility-1] org.apache.catalina.core.StandardContext.reload Reloading Context with name [/manager] has started
+13-Apr-2023 14:53:06.369 INFO [Catalina-utility-1] org.apache.catalina.core.StandardContext.reload Reloading Context with name [/manager] is completed
+13-Apr-2023 14:53:06.370 INFO [Catalina-utility-1] org.apache.catalina.startup.HostConfig.reload Reloading context [/docs]
+13-Apr-2023 14:53:06.370 INFO [Catalina-utility-1] org.apache.catalina.core.StandardContext.reload Reloading Context with name [/docs] has started
+13-Apr-2023 14:53:06.414 INFO [Catalina-utility-1] org.apache.catalina.core.StandardContext.reload Reloading Context with name [/docs] is completed
+13-Apr-2023 15:33:36.791 INFO [Catalina-utility-2] org.apache.catalina.startup.HostConfig.reload Reloading context [/myApp]
+13-Apr-2023 15:33:36.791 INFO [Catalina-utility-2] org.apache.catalina.core.StandardContext.reload Reloading Context with name [/myApp] has started
+13-Apr-2023 15:33:36.812 INFO [Catalina-utility-2] org.apache.catalina.core.StandardContext.reload Reloading Context with name [/myApp] is completed
