@@ -27,18 +27,6 @@ public class TestingServlet extends HttpServlet {
         out.println("<input type=submit name=increment>");
         out.println("</form>");
   out.println("</BODY>");
-
-  // TODO: Probably change place of this code
-  out.println("<form name=\"loginform\"");
-  out.println("action=\"http://www.mydomain.com/login\" method=\"POST\">");
-  out.println();
-  out.println("<input type=“text\" size=35 value=“username”>");
-  out.println();
-  out.println("<input type=\"password\" size=35 value=“password”>");
-  out.println();
-  out.println("<input type=\"hidden\" value=redirect_url>");
-  out.println();
-  out.println("</form>");
   out.println("</HTML>");
   counter ++;
  }
