@@ -14,6 +14,11 @@ public class UserAccount implements Account, AccountWrite{
         this.isLocked = false;
     }
 
+    /**
+     * Converts the given string which represents a password to a unconvertible hash that is then stored in the account
+     * @param password String that represents the account's password
+     * @return The hash of the given string
+     */
     private String GetHashFromPwd(String password) {
         return null;
     }

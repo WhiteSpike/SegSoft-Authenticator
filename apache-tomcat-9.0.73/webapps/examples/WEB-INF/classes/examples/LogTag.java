@@ -33,11 +33,7 @@ public class LogTag extends ExampleTagBase {
     public void setToBrowser(String value) {
         if (value == null) {
             toBrowser = false;
-        } else if (value.equalsIgnoreCase("true")) {
-            toBrowser = true;
-        } else {
-            toBrowser = false;
-        }
+        } else toBrowser = value.equalsIgnoreCase("true");
     }
 
     @Override

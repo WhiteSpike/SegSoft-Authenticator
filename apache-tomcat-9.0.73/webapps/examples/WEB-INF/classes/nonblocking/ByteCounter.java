@@ -81,7 +81,7 @@ public class ByteCounter extends HttpServlet {
 
         private volatile boolean readFinished = false;
         private volatile long totalBytesRead = 0;
-        private byte[] buffer = new byte[8192];
+        private final byte[] buffer = new byte[8192];
 
         private CounterListener(AsyncContext ac, ServletInputStream sis,
                 ServletOutputStream sos) {

@@ -196,7 +196,7 @@ public class Stockticker implements Runnable {
             buf.append('#');
             buf.append(getLastChangeAsString());
             buf.append('#');
-            buf.append(String.valueOf(getCnt()));
+            buf.append(getCnt());
             return buf.toString();
 
         }

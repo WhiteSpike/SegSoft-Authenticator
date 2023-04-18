@@ -76,7 +76,7 @@ public class NumberWriter extends HttpServlet {
         private final AtomicInteger counter = new AtomicInteger(0);
 
         private volatile boolean readFinished = false;
-        private byte[] buffer = new byte[8192];
+        private final byte[] buffer = new byte[8192];
 
         private NumberWriterListener(AsyncContext ac, ServletInputStream sis,
                 ServletOutputStream sos) {

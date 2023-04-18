@@ -88,7 +88,7 @@ public class SnakeAnnotation {
             }
         }
         SnakeTimer.broadcast(String.format("{\"type\": \"join\",\"data\":[%s]}",
-                sb.toString()));
+                sb));
     }
 
 

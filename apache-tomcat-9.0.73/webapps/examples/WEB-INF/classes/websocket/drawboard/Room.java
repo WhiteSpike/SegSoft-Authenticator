@@ -283,7 +283,7 @@ public final class Room {
             String msgStr = msg.toString();
 
             for (Player p : players) {
-                String s = String.valueOf(p.getLastReceivedMessageId())
+                String s = p.getLastReceivedMessageId()
                         + "," + msgStr;
                 p.sendRoomMessage(MessageType.DRAW_MESSAGE, s);
             }
@@ -313,7 +313,7 @@ public final class Room {
                 for (int i = 0; i < drawMessages.size(); i++) {
                     DrawMessage msg = drawMessages.get(i);
 
-                    String s = String.valueOf(p.getLastReceivedMessageId())
+                    String s = p.getLastReceivedMessageId()
                             + "," + msg.toString();
                     if (i > 0) {
                         sb.append('|');
@@ -489,7 +489,7 @@ public final class Room {
             Objects.requireNonNull(content);
             Objects.requireNonNull(type);
 
-            String completeMsg = String.valueOf(type.flag) + content;
+            String completeMsg = type.flag + content;
 
             client.sendMessage(new StringWebsocketMessage(completeMsg));
         }

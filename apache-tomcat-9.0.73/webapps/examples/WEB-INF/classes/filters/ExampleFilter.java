@@ -77,7 +77,7 @@ public final class ExampleFilter extends GenericFilter {
         long startTime = System.currentTimeMillis();
         chain.doFilter(request, response);
         long stopTime = System.currentTimeMillis();
-        getServletContext().log(this.toString() + ": " + (stopTime - startTime) +
+        getServletContext().log(this + ": " + (stopTime - startTime) +
              " milliseconds");
     }
 

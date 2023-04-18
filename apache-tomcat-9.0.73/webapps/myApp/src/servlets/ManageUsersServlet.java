@@ -1,35 +1,40 @@
 package servlets;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
+import accounts.Account;
+import authenticator.Authenticator;
+import authenticator.AuthenticatorClass;
+
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.io.*;
+import java.util.*;
 
 public class ManageUsersServlet extends HttpServlet {
+
+    static Account authUser = null;
+    static Authenticator authenticator = new AuthenticatorClass();
+    private static final String USER = "username";
+    private static final String PWD = "password";
 
     public void doGet(HttpServletRequest request,
                       HttpServletResponse response)
             throws ServletException, IOException {
-
-
         PrintWriter out = response.getWriter();
-        out.println("<HTML>");
-        out.println("<HEAD>");
-        out.println("</HEAD>");
-        out.println("<BODY>");
-        out.println("<form name=\"loginform\"");
-        out.println("action=\"http://www.mydomain.com/login\" method=\"POST\">");
-        out.println();
-        out.println("<input type=“text\" size=35 value=“username”>");
-        out.println();
-        out.println("<input type=\"password\" size=35 value=“password”>");
-        out.println();
-        out.println("<input type=\"hidden\" value=redirect_url>");
-        out.println();
-        out.println("</form>");
-        out.println("</BODY>");
-        out.println("</HTML>");
+        out.println("<!DOCTYPE HTML><html lang=\"en\"><head>\n" +
+                "<meta charset=\"UTF-8\">\n" +
+                "<title>Apache Tomcat Examples</title>\n" +
+                "</head>\n" +
+                "<body>\n" +
+                "<p>\n" +
+                "<h3>User Management Operations:</H3>\n" +
+                "<p></p>\n" +
+                "<ul>\n" +
+                "    <li><a href=\"manageusers/login\">Login</a></li>\n" +
+                "<li><a href=\"CreateAccount\">Create Account</a></li>\n" +
+                "<li><a href=\"DeleteAccount\">Delete Account</a></li>\n" +
+                "<li><a href=\"ChangePassword\">Change Password</a></li>\n" +
+                "    <li><a href=\"Logout\">Logout</a></li>\n" +
+                "</ul>\n" +
+                "</body></html>");
     }
 }

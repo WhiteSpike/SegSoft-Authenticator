@@ -137,7 +137,7 @@ public class Snake {
                     Integer.valueOf(location.x), Integer.valueOf(location.y)));
         }
         return String.format("{\"id\":%d,\"body\":[%s]}",
-                Integer.valueOf(id), sb.toString());
+                Integer.valueOf(id), sb);
     }
 
     public int getId() {

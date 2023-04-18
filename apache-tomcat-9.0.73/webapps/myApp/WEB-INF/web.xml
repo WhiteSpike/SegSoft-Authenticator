@@ -10,12 +10,28 @@
         <servlet-class>test.HelloWorld</servlet-class>
     </servlet> -->
     <servlet>
-        <servlet-name>servlets.TestingServlet</servlet-name>
+        <servlet-name>TestingServlet</servlet-name>
         <servlet-class>servlets.TestingServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ManageUsersServlet</servlet-name>
+        <servlet-class>servlets.ManageUsersServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>servlets.LoginServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
-        <servlet-name>servlets.TestingServlet</servlet-name>
+        <servlet-name>TestingServlet</servlet-name>
         <url-pattern>/Test</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManageUsersServlet</servlet-name>
+        <url-pattern>/manageusers</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/manageusers/login</url-pattern>
     </servlet-mapping>
 </web-app>
 

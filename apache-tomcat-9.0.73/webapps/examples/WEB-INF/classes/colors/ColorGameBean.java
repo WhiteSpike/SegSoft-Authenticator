@@ -84,11 +84,8 @@ public class ColorGameBean {
         if (background.equalsIgnoreCase("black") ||
             background.equalsIgnoreCase("cyan")) {
 
-            if (foreground.equalsIgnoreCase("black") ||
-                foreground.equalsIgnoreCase("cyan")) {
-                return true;
-            }
-            return false;
+            return foreground.equalsIgnoreCase("black") ||
+                    foreground.equalsIgnoreCase("cyan");
         }
 
         return false;

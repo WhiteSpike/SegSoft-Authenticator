@@ -72,7 +72,7 @@ public class ValuesTag extends TagSupport {
                 out.print("-1");
             }
         } catch (IOException ex) {
-            throw new JspTagException("IOException: " + ex.toString(), ex);
+            throw new JspTagException("IOException: " + ex, ex);
         }
         return super.doEndTag();
     }

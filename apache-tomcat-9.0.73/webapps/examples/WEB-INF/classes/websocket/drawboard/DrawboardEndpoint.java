@@ -104,7 +104,7 @@ public final class DrawboardEndpoint extends Endpoint {
                     }
 
                 } catch (RuntimeException ex) {
-                    log.error("Unexpected exception: " + ex.toString(), ex);
+                    log.error("Unexpected exception: " + ex, ex);
                 }
             }
         });
@@ -131,7 +131,7 @@ public final class DrawboardEndpoint extends Endpoint {
                             player = null;
                         }
                     } catch (RuntimeException ex) {
-                        log.error("Unexpected exception: " + ex.toString(), ex);
+                        log.error("Unexpected exception: " + ex, ex);
                     }
                 }
             });
@@ -158,7 +158,7 @@ public final class DrawboardEndpoint extends Endpoint {
             // IOException after close. Assume this is a variation of the user
             // closing their browser (or refreshing very quickly) and ignore it.
         } else {
-            log.error("onError: " + t.toString(), t);
+            log.error("onError: " + t, t);
         }
     }
 
@@ -224,7 +224,7 @@ public final class DrawboardEndpoint extends Endpoint {
                         }
 
                     } catch (RuntimeException ex) {
-                        log.error("Unexpected exception: " + ex.toString(), ex);
+                        log.error("Unexpected exception: " + ex, ex);
                     }
                 }
             });

@@ -57,11 +57,7 @@ public class Location {
         if (x != location.x) {
             return false;
         }
-        if (y != location.y) {
-            return false;
-        }
-
-        return true;
+        return y == location.y;
     }
 
     @Override

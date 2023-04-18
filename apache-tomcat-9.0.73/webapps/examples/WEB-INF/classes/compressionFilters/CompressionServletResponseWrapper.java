@@ -207,7 +207,7 @@ public class CompressionServletResponseWrapper
         if (debug > 1) {
             System.out.println("flush buffer @ GZipServletResponseWrapper");
         }
-        ((CompressionResponseStream)stream).flush();
+        stream.flush();
 
     }
 

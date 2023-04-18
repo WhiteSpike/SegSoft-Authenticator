@@ -21,7 +21,7 @@ public class AuthenticatorClass implements Authenticator{
         if (hasAccountsWithName(name)) throw new AccountAlreadyExists();
         if (!pwd1.equals(pwd2)) throw new Forbidden();
         Account account = new UserAccount(name, pwd1);
-        // Save in file/database
+        // Save in file/database the account info
     }
 
     @Override
@@ -67,10 +67,17 @@ public class AuthenticatorClass implements Authenticator{
 
     @Override
     public void CheckAuthenticatedRequest(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
+        // Get the parameters from the http session
+        // Look for account with name
+        // Check if passwords match
+        // (Optional) Check if token expired
+        // (Optional) One time use token
 
     }
 
     private boolean hasAccountsWithName(String name){
-        return true;
+        Account account = null;
+        // Find in file/database for account with name
+        return account != null;
     }
 }
