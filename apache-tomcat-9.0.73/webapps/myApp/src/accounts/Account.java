@@ -16,9 +16,9 @@ public interface Account {
 
     /**
      *
-     * @return Java Web Token of the account
+     * @return Type of the account
      */
-    String GetJWT();
+    String GetAccountType();
     /**
      *
      * @return the account is currently authenticated or not
@@ -30,4 +30,11 @@ public interface Account {
      * @return the account is locked (cannot be authenticated) or not
      */
     boolean isLocked();
+
+    /**
+     * Checks if the given password is the same as the one saved in this account
+     * @param pwd Password that we want to check
+     * @return true if equal, false otherwise
+     */
+    boolean EqualHash(String pwd);
 }

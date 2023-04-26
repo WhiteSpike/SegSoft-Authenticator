@@ -9,6 +9,14 @@ public class TestingServlet extends HttpServlet {
 
 	static int counter = 0;
 
+    /**
+     * Prints the counter application
+     * TODO: Only allow the increment operation if the person requesting the operation is authenticated (basically a JWT that expires upon one use and refreshes)
+     * @param request HTTP request of the user
+     * @param response HTTP response to the user
+     * @throws ServletException
+     * @throws IOException
+     */
  public void doGet(HttpServletRequest request, 
   HttpServletResponse response) 
   throws ServletException, IOException

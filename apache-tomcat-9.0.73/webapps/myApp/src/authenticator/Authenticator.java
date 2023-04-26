@@ -17,7 +17,7 @@ public interface Authenticator {
      * @throws Forbidden If pwd1 does not equal to pwd2
      * @throws AccountAlreadyExists If there is already an account with given name
      */
-    void CreateAccount(String name, String pwd1, String pwd2) throws Forbidden, AccountAlreadyExists;
+    void CreateAccount(String name, String pwd1, String pwd2, String type) throws Forbidden, AccountAlreadyExists;
 
     /**
      * Deletes an account with given name
@@ -61,7 +61,7 @@ public interface Authenticator {
      * @param userAccount Account that is currently authenticated
      * @throws AccountNotLoggedIn if the account is already not authenticated
      */
-    void Logout(Account userAccount) throws AccountNotLoggedIn;
+    void Logout(Account userAccount) throws AccountNotLoggedIn, UndefinedAccount;
 
     /**
      * Checks if the session of the HTTP request is currently authenticated

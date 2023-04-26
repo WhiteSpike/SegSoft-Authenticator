@@ -25,11 +25,4 @@ public interface AccountWrite extends Account {
      * @param pwd New password of the account
      */
     void SetAccountHash(String pwd);
-
-    /**
-     * Checks if the given password is the same as the one saved in this account
-     * @param pwd Password that we want to check
-     * @return true if equal, false otherwise
-     */
-    boolean EqualHash(String pwd);
 }

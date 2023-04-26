@@ -1,14 +1,13 @@
 package accounts;
 
-public class UserAccount implements Account, AccountWrite{
-
+public class RootAccount implements Account, AccountWrite{
     private String name;
     private String hash;
     private String type;
     private boolean isLoggedIn;
     private boolean isLocked;
 
-    public UserAccount(String name, String password) {
+    public RootAccount(String name, String password) {
         this.name = name;
         this.hash = GetHashFromPwd(password);
         this.type = "user";
@@ -16,7 +15,7 @@ public class UserAccount implements Account, AccountWrite{
         this.isLocked = false;
     }
 
-    public UserAccount(String[] parameters) {
+    public RootAccount(String[] parameters) {
         this.name = parameters[0];
         this.hash = parameters[1];
         this.type = parameters[2];

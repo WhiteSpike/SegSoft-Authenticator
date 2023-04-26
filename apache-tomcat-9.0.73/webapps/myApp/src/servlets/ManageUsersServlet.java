@@ -11,11 +11,13 @@ import java.util.*;
 
 public class ManageUsersServlet extends HttpServlet {
 
-    static Account authUser = null;
-    static Authenticator authenticator = new AuthenticatorClass();
-    private static final String USER = "username";
-    private static final String PWD = "password";
-
+    /**
+     * Prints the list of links specified in the pdf, specifically in the slide number 92 ("How to demo your authenticator module")
+     * @param request HTTP request of the user
+     * @param response HTTP response to the user
+     * @throws ServletException
+     * @throws IOException
+     */
     public void doGet(HttpServletRequest request,
                       HttpServletResponse response)
             throws ServletException, IOException {
@@ -30,10 +32,10 @@ public class ManageUsersServlet extends HttpServlet {
                 "<p></p>\n" +
                 "<ul>\n" +
                 "    <li><a href=\"manageusers/login\">Login</a></li>\n" +
-                "<li><a href=\"CreateAccount\">Create Account</a></li>\n" +
-                "<li><a href=\"DeleteAccount\">Delete Account</a></li>\n" +
-                "<li><a href=\"ChangePassword\">Change Password</a></li>\n" +
-                "    <li><a href=\"Logout\">Logout</a></li>\n" +
+                "<li><a href=\"manageusers/register\">Create Account</a></li>\n" +
+                "<li><a href=\"manageusers/delete\">Delete Account</a></li>\n" +
+                "<li><a href=\"manageusers/changepassword\">Change Password</a></li>\n" +
+                "    <li><a href=\"manageusers/logout\">Logout</a></li>\n" +
                 "</ul>\n" +
                 "</body></html>");
     }
