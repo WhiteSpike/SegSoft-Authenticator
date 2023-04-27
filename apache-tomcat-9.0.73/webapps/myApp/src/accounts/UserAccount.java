@@ -1,6 +1,14 @@
 package accounts;
-
+import java.security.*;
+import javax.crypto.*;
+import javax.crypto.spec.SecretKeySpec;
+import java.util.Base64.*;
 public class UserAccount implements Account, AccountWrite{
+
+    private static final String ALGO = "AES";
+    private static final byte[] keyValue = new byte[] { 'F', 'C', 'T', '/', 'U', 'N', 'L', 'r',
+            'o', 'c', 'k','s', '!', '!', 'd', 'i' };
+    private Key key = new SecretKeySpec(keyValue, ALGO);
 
     private String name;
     private String hash;
@@ -30,7 +38,13 @@ public class UserAccount implements Account, AccountWrite{
      * @return The hash of the given string
      */
     private String GetHashFromPwd(String password) {
-        return null;
+        try
+        {
+            return encrypt(password);
+        } catch (Exception e)
+        {
+            return null;
+        }
     }
 
     @Override
@@ -82,5 +96,13 @@ public class UserAccount implements Account, AccountWrite{
     public boolean EqualHash(String pwd) {
         String hash = GetHashFromPwd(pwd);
         return this.hash.equals(hash);
+    }
+
+    private String encrypt(String Data) throws Exception {
+        Cipher c = Cipher.getInstance(ALGO);
+        c.init(Cipher.ENCRYPT_MODE, key);
+        byte[] encVal = c.doFinal(Data.getBytes());
+        return java.util.Base64.
+                getEncoder().encodeToString(encVal);
     }
 }

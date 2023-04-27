@@ -7,23 +7,30 @@ import accounts.UserAccount;
 import exceptions.*;
 
 import javax.naming.AuthenticationException;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.util.logging.Logger;
 
 public class AuthenticatorClass implements Authenticator{
 
-    public AuthenticatorClass()
+    private static final Logger logger = Logger.getLogger(Authenticator.class.getName());
+    private String filePath;
+
+    public AuthenticatorClass(ServletContext context)
     {
+        this.filePath = context.getRealPath("WEB-INF/data");
     }
 
     @Override
     public void CreateAccount(String name, String pwd1, String pwd2, String type) throws Forbidden, AccountAlreadyExists {
+        logger.info("Received 'Create Account' request for name:" + name);
         Account account = GetAccount(name);
-        if (account == null) throw new AccountAlreadyExists();
+        if (account != null) throw new AccountAlreadyExists();
         if (!pwd1.equals(pwd2)) throw new Forbidden();
         account = new UserAccount(name, pwd1);
         WriteAccountToFile(account);
@@ -31,7 +38,7 @@ public class AuthenticatorClass implements Authenticator{
 
     private void WriteAccountToFile(Account account) {
         try {
-            FileWriter out = new FileWriter("accounts.txt", true);
+            FileWriter out = new FileWriter(this.filePath + "/accounts.txt", true);
             out.write(account.GetAccountName()
                     + "," + account.GetAccountHash()
                     + "," + account.GetAccountType()
@@ -45,6 +52,7 @@ public class AuthenticatorClass implements Authenticator{
 
     @Override
     public void DeleteAccount(String name) throws UndefinedAccount, NotLockedAccount, AccountLoggedIn {
+        logger.info("Received 'Delete Account' request for name: " + name);
         Account account = GetAccount(name);
         if (account == null) throw new UndefinedAccount();
         if (account.isLoggedIn()) throw new AccountLoggedIn();
@@ -54,13 +62,14 @@ public class AuthenticatorClass implements Authenticator{
 
     private void RemoveAccountFromFile(String name) {
         try {
-            File inFile = new File("accounts.txt");
-            File outFile = new File("tempaccounts.txt");
+            File inFile = new File(this.filePath + "/accounts.txt");
+            File outFile = new File(this.filePath + "/tempaccounts.txt");
             FileReader file = new FileReader(inFile);
             BufferedReader in = new BufferedReader(file);
             FileWriter out = new FileWriter(outFile, false);
             String line;
             while((line = in.readLine()) != null){
+                line += '\n';
                 String[] parameters = line.split(",");
                 String accountName = parameters[0];
 
@@ -80,7 +89,7 @@ public class AuthenticatorClass implements Authenticator{
     public Account GetAccount(String name) {
 
         try {
-            FileReader file = new FileReader("accounts.txt");
+            FileReader file = new FileReader(this.filePath + "/accounts.txt");
             BufferedReader in = new BufferedReader(file);
             String line;
             while((line = in.readLine()) != null){
@@ -88,11 +97,11 @@ public class AuthenticatorClass implements Authenticator{
                 String accountName = parameters[0];
 
                 if (!accountName.equals(name)) continue;
-            switch(parameters[2]){
-                case "user": return new UserAccount(parameters);
-                case "root": return new RootAccount(parameters);
-                default: return null;
-            }
+                return switch (parameters[2]) {
+                    case "user" -> new UserAccount(parameters);
+                    case "root" -> new RootAccount(parameters);
+                    default -> null;
+                };
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -102,6 +111,7 @@ public class AuthenticatorClass implements Authenticator{
 
     @Override
     public void ChangePassword(String name, String pwd1, String pwd2) throws UndefinedAccount, Forbidden {
+        logger.info("Received 'Change Password' request for name: " + name);
         Account account = GetAccount(name);
 
         if (account == null) throw new UndefinedAccount();
@@ -115,6 +125,7 @@ public class AuthenticatorClass implements Authenticator{
 
     @Override
     public Account AuthenticateUser(String name, String pwd) throws UndefinedAccount, LockedAccount, AuthenticationError {
+        logger.info("Received 'Authenticate User' request for name: " + name);
         Account account = GetAccount(name);
 
         if (account == null) throw new UndefinedAccount();
@@ -124,6 +135,7 @@ public class AuthenticatorClass implements Authenticator{
         AccountWrite accountWrite = (AccountWrite) account;
         accountWrite.SetIsLoggedIn(true);
 
+        RemoveAccountFromFile(name);
         WriteAccountToFile(accountWrite);
 
         return accountWrite;
@@ -131,6 +143,7 @@ public class AuthenticatorClass implements Authenticator{
 
     @Override
     public void Logout(Account account) throws UndefinedAccount, AccountNotLoggedIn {
+        logger.info("Received 'Log Out' request.");
         if (account == null) throw new UndefinedAccount();
         if (!account.isLoggedIn()) throw new AccountNotLoggedIn();
 
@@ -141,7 +154,8 @@ public class AuthenticatorClass implements Authenticator{
     }
 
     @Override
-    public void CheckAuthenticatedRequest(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
+    public Account CheckAuthenticatedRequest(HttpServletRequest request, HttpServletResponse response) throws AuthenticationError {
+        logger.info("Received 'Check Authenticated Request' request.");
         // Get the parameters from the http session
         String JWT = request.getParameter("JWT");
         // Plan is JWT contains username and expire date
@@ -150,7 +164,7 @@ public class AuthenticatorClass implements Authenticator{
         // (Optional) One time use token
         // Look for account with name
         Account account = GetAccount(name);
-        if (!account.isLoggedIn()) throw new AuthenticationException();
-
+        if (account == null || !account.isLoggedIn()) throw new AuthenticationError();
+        return account;
     }
 }

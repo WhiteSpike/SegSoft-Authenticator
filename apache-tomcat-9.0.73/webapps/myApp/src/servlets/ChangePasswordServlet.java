@@ -4,8 +4,8 @@ import accounts.Account;
 import accounts.RootAccount;
 import authenticator.Authenticator;
 import authenticator.AuthenticatorClass;
-import exceptions.AccountAlreadyExists;
 import exceptions.Forbidden;
+import exceptions.UndefinedAccount;
 
 import javax.naming.AuthenticationException;
 import javax.servlet.ServletContext;
@@ -16,18 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-/**
- * Servlet used for the root to register their accounts into the application. They will need to insert a username,
- * their password and confirmation of the intended password. After sending the request, a message will pop up saying the
- * status of the operation executed to make a new account.
- *
- * As soon as the servlet is initialized, we create our authenticator object with its context so that the authenticator can know
- * where to store the accounts (Right now it's expecting to be at "WEB-INF/data/accounts.txt", if we ever decide to change where
- * to store our accounts, we must change this)
- *
- * Below the form, there's a link to the login page in case the user wishes to immediately login after creating the account
- */
-public class RegisterServlet extends HttpServlet {
+public class ChangePasswordServlet extends HttpServlet {
 
     private Authenticator auth;
 
@@ -36,11 +25,7 @@ public class RegisterServlet extends HttpServlet {
         ServletContext context = getServletContext();
         this.auth = new AuthenticatorClass(context);
     }
-    /**
-     * Prints the form for input of account name, password and confirmation of password
-     * @param request HTTP request sent by the user
-     * @param response HTTP response sent to the user
-     */
+
     @Override
     public void doGet(HttpServletRequest request,
                       HttpServletResponse response)
@@ -51,49 +36,41 @@ public class RegisterServlet extends HttpServlet {
         out.println("<HEAD>");
         out.println("</HEAD>");
         out.println("<BODY>");
-        out.println("<form name=\"registerForm\"");
-        out.println("action=\"register\" method=\"POST\">");
+        out.println("<form name=\"changePasswordForm\"");
+        out.println("action=\"changepassword\" method=\"POST\">");
         out.println("<br>");
         out.println("<label for=\"Username\">Username:</label>");
         out.println("<br>");
         out.println("<input type=“text\" size=35 name=\"username\" required>");
         out.println("<br>");
+        out.println("<label for=\"Old Password\">Old Password:</label>");
         out.println("<br>");
-        out.println("<label for=\"Password\">Password:</label>");
+        out.println("<input type=\"password\" size=35 name=\"oldPassword\" required>");
         out.println("<br>");
-        out.println("<input type=\"password\" size=35 name=\"password\" required>");
+        out.println("<label for=\"New Password\">New Password:</label>");
         out.println("<br>");
+        out.println("<input type=\"password\" size=35 name=\"newPassword\" required>");
         out.println("<br>");
         out.println("<label for=\"Confirm Password\">Confirm Password:</label>");
         out.println("<br>");
         out.println("<input type=\"password\" size=35 name=\"confirmPassword\" required>");
         out.println("<br>");
+        out.println("<input type=\"submit\" value=\"Change Password\">");
         out.println("<br>");
-        out.println("<input type=\"submit\" value=\"Register\">");
-        out.println("<br>");
-        out.println("<br>");
-        out.println("<a href=\"../manageusers\">Back</a>");
         out.println("</form>");
         out.println("</BODY>");
         out.println("</HTML>");
+
     }
 
-    /**
-     * Sends a request to the authenticator module to create an account with current http session information
-     * The operation will only succeed if the current user in the session is root, there is no other accounts with the same name
-     * and the passwords match
-     * @param request HTTP request sent by the user, where it's stored the username, password and confirmation of password
-     * @param response HTTP response sent to the user, where the form will be printed along with the message of the status of the operation
-     * @throws ServletException
-     * @throws IOException
-     */
+
     @Override
     public void doPost(HttpServletRequest request,
                       HttpServletResponse response)
             throws ServletException, IOException {
-
         String username = request.getParameter("username");
-        String password = request.getParameter("password");
+        String oldPassword = request.getParameter("oldPassword");
+        String newPassword = request.getParameter("newPassword");
         String confirmPassword = request.getParameter("confirmPassword");
 
         PrintWriter out = response.getWriter();
@@ -101,46 +78,46 @@ public class RegisterServlet extends HttpServlet {
         out.println("<HEAD>");
         out.println("</HEAD>");
         out.println("<BODY>");
-
-        out.println("<form name=\"registerForm\"");
-        out.println("action=\"register\" method=\"POST\">");
+        out.println("<form name=\"changePasswordForm\"");
+        out.println("action=\"changepassword\" method=\"POST\">");
         out.println("<br>");
         out.println("<label for=\"Username\">Username:</label>");
         out.println("<br>");
         out.println("<input type=“text\" size=35 name=\"username\" required>");
         out.println("<br>");
+        out.println("<label for=\"Old Password\">Old Password:</label>");
         out.println("<br>");
-        out.println("<label for=\"Password\">Password:</label>");
+        out.println("<input type=\"password\" size=35 name=\"oldPassword\" required>");
         out.println("<br>");
-        out.println("<input type=\"password\" size=35 name=\"password\" required>");
+        out.println("<label for=\"New Password\">New Password:</label>");
         out.println("<br>");
+        out.println("<input type=\"password\" size=35 name=\"newPassword\" required>");
         out.println("<br>");
         out.println("<label for=\"Confirm Password\">Confirm Password:</label>");
         out.println("<br>");
         out.println("<input type=\"password\" size=35 name=\"confirmPassword\" required>");
         out.println("<br>");
-        out.println("<br>");
-        out.println("<input type=\"submit\" value=\"Register\">");
+        out.println("<input type=\"submit\" value=\"Change Password\">");
         out.println("<br>");
         try
         {
+            // Way to check if the user in session is the same as the one requesting to change password
             Account account = auth.CheckAuthenticatedRequest(request, response);
-            if(!(account instanceof RootAccount))
+
+            if(!(account.GetAccountName().equals(username)))
                 out.println("<p>Current user does not have permission to execute this operation</p>");
             else
             {
-                auth.CreateAccount(username, password, confirmPassword, "user");
+                auth.ChangePassword(username, newPassword, confirmPassword);
                 out.println("Account successfully created!");
             }
         } catch (Exception e)
         {
             out.println(e.getMessage());
         }
-        out.println("<br>");
-        out.println("<br>");
-        out.println("<a href=\"../manageusers\">Back</a>");
         out.println("</form>");
         out.println("</BODY>");
         out.println("</HTML>");
+
     }
 }

@@ -25,6 +25,14 @@
         <servlet-name>RegisterServlet</servlet-name>
         <servlet-class>servlets.RegisterServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteServlet</servlet-name>
+        <servlet-class>servlets.DeleteServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangePasswordServlet</servlet-name>
+        <servlet-class>servlets.ChangePasswordServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>TestingServlet</servlet-name>
         <url-pattern>/Test</url-pattern>
@@ -40,6 +48,14 @@
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/manageusers/register</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteServlet</servlet-name>
+        <url-pattern>/manageusers/delete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangePasswordServlet</servlet-name>
+        <url-pattern>/manageusers/changepassword</url-pattern>
     </servlet-mapping>
 </web-app>
 

@@ -7,6 +7,9 @@ import javax.naming.AuthenticationException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * Module used for authentication of user principals
+ */
 public interface Authenticator {
 
     /**
@@ -67,7 +70,8 @@ public interface Authenticator {
      * Checks if the session of the HTTP request is currently authenticated
      * @param request HTTP request sent to the authenticator
      * @param response HTTP response to send to the client
-     * @throws AuthenticationException if the user is not currently authenticated
+     * @return Account authenticated in the HTTP session
+     * @throws AuthenticationError if the user is not currently authenticated
      */
-    void CheckAuthenticatedRequest(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException;
+    Account CheckAuthenticatedRequest(HttpServletRequest request, HttpServletResponse response) throws AuthenticationError;
 }
