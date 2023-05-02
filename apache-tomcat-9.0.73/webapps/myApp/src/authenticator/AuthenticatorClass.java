@@ -6,7 +6,6 @@ import accounts.RootAccount;
 import accounts.UserAccount;
 import exceptions.*;
 
-import javax.naming.AuthenticationException;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
