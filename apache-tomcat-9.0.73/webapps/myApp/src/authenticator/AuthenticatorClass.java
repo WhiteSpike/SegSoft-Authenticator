@@ -7,7 +7,6 @@ import accounts.UserAccount;
 import exceptions.*;
 import jwt.JwtUtil;
 
-import javax.naming.AuthenticationException;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

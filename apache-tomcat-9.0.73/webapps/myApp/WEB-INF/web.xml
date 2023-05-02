@@ -10,12 +10,12 @@
         <servlet-class>test.HelloWorld</servlet-class>
     </servlet> -->
     <servlet>
-        <servlet-name>TestingServlet</servlet-name>
-        <servlet-class>servlets.TestingServlet</servlet-class>
+        <servlet-name>CounterServlet</servlet-name>
+        <servlet-class>servlets.CounterServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ManageUsersServlet</servlet-name>
-        <servlet-class>servlets.ManageUsersServlet</servlet-class>
+        <servlet-class>servlets.UserManagementServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
@@ -34,28 +34,28 @@
         <servlet-class>servlets.ChangePasswordServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>TestingServlet</servlet-name>
-        <url-pattern>/Test</url-pattern>
+        <servlet-name>CounterServlet</servlet-name>
+        <url-pattern>/Counter</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ManageUsersServlet</servlet-name>
-        <url-pattern>/manageusers</url-pattern>
+        <url-pattern>/UserManagement</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
-        <url-pattern>/manageusers/login</url-pattern>
+        <url-pattern>/UserManagement/login</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
-        <url-pattern>/manageusers/register</url-pattern>
+        <url-pattern>/UserManagement/register</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>DeleteServlet</servlet-name>
-        <url-pattern>/manageusers/delete</url-pattern>
+        <url-pattern>/UserManagement/delete</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ChangePasswordServlet</servlet-name>
-        <url-pattern>/manageusers/changepassword</url-pattern>
+        <url-pattern>/UserManagement/ChangePassword</url-pattern>
     </servlet-mapping>
 </web-app>
 

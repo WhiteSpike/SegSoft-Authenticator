@@ -44,7 +44,11 @@ public class DeleteServlet extends HttpServlet {
         out.println("<br>");
         out.println("<input type=“text\" size=35 name=\"username\" required>");
         out.println("<br>");
+        out.println("<br>");
         out.println("<input type=\"submit\" value=\"Delete Account\">");
+        out.println("<br>");
+        out.println("<br>");
+        out.println("<a href=\"../UserManagement\">Back</a>");
         out.println("</form>");
         out.println("</BODY>");
         out.println("</HTML>");
@@ -88,6 +92,8 @@ public class DeleteServlet extends HttpServlet {
         {
             out.println(e.getMessage());
         }
+        out.println("<br>");
+        out.println("<a href=\"../UserManagement\">Back</a>");
         out.println("</form>");
         out.println("</BODY>");
         out.println("</HTML>");

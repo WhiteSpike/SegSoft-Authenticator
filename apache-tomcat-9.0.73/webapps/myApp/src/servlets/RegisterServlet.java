@@ -4,10 +4,7 @@ import accounts.Account;
 import accounts.RootAccount;
 import authenticator.Authenticator;
 import authenticator.AuthenticatorClass;
-import exceptions.AccountAlreadyExists;
-import exceptions.Forbidden;
 
-import javax.naming.AuthenticationException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -72,7 +69,7 @@ public class RegisterServlet extends HttpServlet {
         out.println("<input type=\"submit\" value=\"Register\">");
         out.println("<br>");
         out.println("<br>");
-        out.println("<a href=\"../manageusers\">Back</a>");
+        out.println("<a href=\"../UserManagement\">Back</a>");
         out.println("</form>");
         out.println("</BODY>");
         out.println("</HTML>");
@@ -138,7 +135,7 @@ public class RegisterServlet extends HttpServlet {
         }
         out.println("<br>");
         out.println("<br>");
-        out.println("<a href=\"../manageusers\">Back</a>");
+        out.println("<a href=\"../UserManagement\">Back</a>");
         out.println("</form>");
         out.println("</BODY>");
         out.println("</HTML>");
