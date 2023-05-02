@@ -109,12 +109,13 @@ public class ChangePasswordServlet extends HttpServlet {
             else
             {
                 auth.ChangePassword(username, newPassword, confirmPassword);
-                out.println("Account successfully created!");
+                out.println("Password successfully changed!");
             }
         } catch (Exception e)
         {
             out.println(e.getMessage());
         }
+        out.println("<a href=\"../manageusers\">Back</a>");
         out.println("</form>");
         out.println("</BODY>");
         out.println("</HTML>");

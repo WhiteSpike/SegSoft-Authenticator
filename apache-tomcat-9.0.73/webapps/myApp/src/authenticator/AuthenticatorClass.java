@@ -5,15 +5,14 @@ import accounts.AccountWrite;
 import accounts.RootAccount;
 import accounts.UserAccount;
 import exceptions.*;
+import jwt.JwtUtil;
 
 import javax.naming.AuthenticationException;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.*;
+import java.util.Date;
 import java.util.logging.Logger;
 
 public class AuthenticatorClass implements Authenticator{
@@ -157,10 +156,23 @@ public class AuthenticatorClass implements Authenticator{
     public Account CheckAuthenticatedRequest(HttpServletRequest request, HttpServletResponse response) throws AuthenticationError {
         logger.info("Received 'Check Authenticated Request' request.");
         // Get the parameters from the http session
-        String JWT = request.getParameter("JWT");
+
+        String jwt = (String) request.getSession().getAttribute("jwt"); // get session instead of get parameter
         // Plan is JWT contains username and expire date
-        String name = null; // TODO Get name from JWT after validating it
-        // (Optional) Check if token expired
+
+        Claims claims = JwtUtil.parseJWT(jwt);
+        String name = claims.getId(); // TODO Get name from JWT after validating it
+        String type = claims.getIssuer(); // it's called issuer because there is no "type" in jwt but its used here to
+        // simplify the process of access level recognition
+
+        // Check if token expired
+        Date now = new Date();
+        if (now.after(claims.getExpiration())) {
+            return null;
+        } else {
+            // Token is still valid
+        }
+
         // (Optional) One time use token
         // Look for account with name
         Account account = GetAccount(name);

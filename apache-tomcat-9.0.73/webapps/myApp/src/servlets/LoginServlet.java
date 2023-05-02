@@ -6,6 +6,7 @@ import authenticator.AuthenticatorClass;
 import exceptions.AuthenticationError;
 import exceptions.LockedAccount;
 import exceptions.UndefinedAccount;
+import jwt.JwtUtil;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -96,9 +97,9 @@ public class LoginServlet extends HttpServlet {
         out.println("<br>");
         try{
             Account account = auth.AuthenticateUser(username, password);
-            // TODO Generate JWT
+            String jwt = JwtUtil.createJWT(account.GetAccountName());
             out.println("<p>You have logged in into your account!</p>");
-            // TODO Associate JWT into the HTTP session
+            request.getSession().setAttribute("jwt", jwt);
         } catch (Exception e)
         {
             out.println(e.getMessage());

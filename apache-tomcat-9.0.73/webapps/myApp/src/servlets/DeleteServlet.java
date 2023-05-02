@@ -70,6 +70,8 @@ public class DeleteServlet extends HttpServlet {
         out.println("<input type=“text\" size=35 name=\"username\" required>");
         out.println("<br>");
         out.println("<input type=\"submit\" value=\"Delete Account\">");
+        out.println("<br>");
+        out.println("<a href=\"../manageusers\">Back</a>");
 
         try
         {
@@ -80,7 +82,7 @@ public class DeleteServlet extends HttpServlet {
             else
             {
                 auth.DeleteAccount(username);
-                out.println("Account successfully created!");
+                out.println("Account successfully deleted!");
             }
         } catch (Exception e)
         {
