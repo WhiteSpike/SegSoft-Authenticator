@@ -37,7 +37,7 @@ public class ChangePasswordServlet extends HttpServlet {
         out.println("</HEAD>");
         out.println("<BODY>");
         out.println("<form name=\"changePasswordForm\"");
-        out.println("action=\"changepassword\" method=\"POST\">");
+        out.println("action=\"ChangePassword\" method=\"POST\">");
         out.println("<br>");
         out.println("<label for=\"Username\">Username:</label>");
         out.println("<br>");
@@ -55,8 +55,11 @@ public class ChangePasswordServlet extends HttpServlet {
         out.println("<br>");
         out.println("<input type=\"password\" size=35 name=\"confirmPassword\" required>");
         out.println("<br>");
+        out.println("<br>");
         out.println("<input type=\"submit\" value=\"Change Password\">");
         out.println("<br>");
+        out.println("<br>");
+        out.println("<a href=\"../UserManagement\">Back</a>");
         out.println("</form>");
         out.println("</BODY>");
         out.println("</HTML>");
@@ -79,7 +82,7 @@ public class ChangePasswordServlet extends HttpServlet {
         out.println("</HEAD>");
         out.println("<BODY>");
         out.println("<form name=\"changePasswordForm\"");
-        out.println("action=\"changepassword\" method=\"POST\">");
+        out.println("action=\"ChangePassword\" method=\"POST\">");
         out.println("<br>");
         out.println("<label for=\"Username\">Username:</label>");
         out.println("<br>");
@@ -115,6 +118,8 @@ public class ChangePasswordServlet extends HttpServlet {
         {
             out.println(e.getMessage());
         }
+        out.println("<br>");
+        out.println("<a href=\"../UserManagement\">Back</a>");
         out.println("</form>");
         out.println("</BODY>");
         out.println("</HTML>");
