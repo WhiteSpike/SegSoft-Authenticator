@@ -13,7 +13,7 @@ import java.io.*;
 import java.util.*;
 
 /**
- * Servlet designed for the url "manageusers/login" where the user can authenticate their account by inserting their accout name
+ * Servlet designed for the url "UserManagement/login" where the user can authenticate their account by inserting their accout name
  * and password. If an error has ocurred while trying to authenticate the account, it will be displayed below the form.
  *
  * The form will contain two parameters: a user name and a password. Password will be hidden while name is shown.
@@ -64,9 +64,11 @@ public class LoginServlet extends HttpServlet {
         out.println("<br>");
         out.println("<input type=\"password\" size=35 name=\"password\" required>");
         out.println("<br>");
+        out.println("<br>");
         out.println("<input type=\"submit\" value=\"Log In\">");
         out.println("<br>");
-        out.println("<a href=\"../manageusers\">Back</a>");
+        out.println("<br>");
+        out.println("<a href=\"../UserManagement\">Back</a>");
         out.println("</form>");
         out.println("</BODY>");
         out.println("</HTML>");
@@ -106,7 +108,7 @@ public class LoginServlet extends HttpServlet {
         out.println("<br>");
         out.println("<input type=\"submit\" value=\"Log In\">");
         out.println("<br>");
-        out.println("<a href=\"../manageusers\">Back</a>");
+        out.println("<a href=\"../UserManagement\">Back</a>");
         out.println("</form>");
         out.println("</BODY>");
         out.println("</HTML>");
