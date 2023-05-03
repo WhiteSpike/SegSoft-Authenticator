@@ -13,14 +13,15 @@ WARNING: The link is associated to localhost so it will only work if you have th
 If the links are changed in the code, they must be changed in this document aswell to keep consistency.
 
 The repository also contains another application which is essentialy used for [User Management](http://localhost:8080/myApp/UserManagement) operations such as:
-- [Logging in](http://localhost:8080/myApp/UserManagement/login);
-- [Create new accounts](http://localhost:8080/myApp/UserManagement/register);
-- [Delete accounts](http://localhost:8080/myApp/UserManagement/delete);
-- [Changing password](http://localhost:8080/myApp/UserManagement/ChangePassword);
+- [Logging in](http://localhost:8080/myApp/UserManagement/login) (method of authentication);
+- [Create new accounts](http://localhost:8080/myApp/UserManagement/register) (needs to be authenticated with root);
+- [Delete accounts](http://localhost:8080/myApp/UserManagement/delete) (needs to be authenticated with root);
+- [Changing password](http://localhost:8080/myApp/UserManagement/ChangePassword) (needs to be authenticated with user which you want to change the password of);
 - Logging out.
 
 For development purposes:
 - Whenever you change some kind of code in the "myApp" folder, you will need to compile its classes and then put the output binaries into the respective "WEB-INF/classes" directory.
+- The root account's password is "root". (For simplicity)
 - To run the tomcat server, either run (from the apache directory):
 ```bash
 ./bin/catalina.sh run
