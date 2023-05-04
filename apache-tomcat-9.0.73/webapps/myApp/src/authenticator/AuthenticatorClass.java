@@ -5,6 +5,7 @@ import accounts.AccountWrite;
 import accounts.RootAccount;
 import accounts.UserAccount;
 import exceptions.*;
+import io.jsonwebtoken.Claims;
 import jwt.JwtUtil;
 
 import javax.servlet.ServletContext;
@@ -140,7 +141,7 @@ public class AuthenticatorClass implements Authenticator{
     }
 
     @Override
-    public void Logout(Account account) throws UndefinedAccount, AccountNotLoggedIn {
+    public void Logout(Account account, HttpServletRequest request) throws UndefinedAccount, AccountNotLoggedIn {
         logger.info("Received 'Log Out' request.");
         if (account == null) throw new UndefinedAccount();
         if (!account.isLoggedIn()) throw new AccountNotLoggedIn();
@@ -149,6 +150,8 @@ public class AuthenticatorClass implements Authenticator{
         accountWrite.SetIsLoggedIn(false);
 
         WriteAccountToFile(accountWrite);
+
+        request.getSession().invalidate();
     }
 
     @Override
@@ -160,7 +163,7 @@ public class AuthenticatorClass implements Authenticator{
         // Plan is JWT contains username and expire date
 
         Claims claims = JwtUtil.parseJWT(jwt);
-        String name = claims.getId(); // TODO Get name from JWT after validating it
+        String name = claims.getId();
         String type = claims.getIssuer(); // it's called issuer because there is no "type" in jwt but its used here to
         // simplify the process of access level recognition
 
@@ -178,4 +181,6 @@ public class AuthenticatorClass implements Authenticator{
         if (account == null || !account.isLoggedIn()) throw new AuthenticationError();
         return account;
     }
+
+
 }

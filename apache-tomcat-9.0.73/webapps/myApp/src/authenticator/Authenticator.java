@@ -64,7 +64,7 @@ public interface Authenticator {
      * @param userAccount Account that is currently authenticated
      * @throws AccountNotLoggedIn if the account is already not authenticated
      */
-    void Logout(Account userAccount) throws AccountNotLoggedIn, UndefinedAccount;
+    void Logout(Account userAccount, HttpServletRequest request) throws AccountNotLoggedIn, UndefinedAccount;
 
     /**
      * Checks if the session of the HTTP request is currently authenticated
