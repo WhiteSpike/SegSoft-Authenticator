@@ -3,14 +3,15 @@ package servlets;
 import accounts.Account;
 import authenticator.Authenticator;
 import authenticator.AuthenticatorClass;
-import exceptions.AuthenticationError;
-import exceptions.LockedAccount;
-import exceptions.UndefinedAccount;
+import jwt.JwtUtil;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
-import java.io.*;
-import java.util.*;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  * Servlet designed for the url "UserManagement/login" where the user can authenticate their account by inserting their accout name
@@ -85,31 +86,20 @@ public class LoginServlet extends HttpServlet {
         out.println("<HEAD>");
         out.println("</HEAD>");
         out.println("<BODY>");
-        out.println("<form name=\"loginform\"");
-        out.println("action=\"login\" method=\"POST\">");
-        out.println("<br>");
-        out.println("<label for=\"Username\">Username:</label>");
-        out.println("<br>");
-        out.println("<input type=“text\" size=35 name=\"username\" required>");
-        out.println("<br>");
-        out.println("<label for=\"Password\">Password:</label>");
-        out.println("<br>");
-        out.println("<input type=\"password\" size=35 name=\"password\" required>");
-        out.println("<br>");
+
         try{
             Account account = auth.AuthenticateUser(username, password);
-            // TODO Generate JWT
+            System.out.println("Creating JWT for ");
+            //throw new JwtException("");
+            JwtUtil jwtUtil = new JwtUtil();
+            String jwt = jwtUtil.createJWT(account.GetAccountName());
             out.println("<p>You have logged in into your account!</p>");
-            // TODO Associate JWT into the HTTP session
+            request.getSession().setAttribute("jwt", jwt);
         } catch (Exception e)
         {
             out.println(e.getMessage());
         }
-        out.println("<br>");
-        out.println("<input type=\"submit\" value=\"Log In\">");
-        out.println("<br>");
         out.println("<a href=\"../UserManagement\">Back</a>");
-        out.println("</form>");
         out.println("</BODY>");
         out.println("</HTML>");
     }

@@ -37,4 +37,6 @@ public interface Account {
      * @return true if equal, false otherwise
      */
     boolean EqualHash(String pwd);
+
+    String Encrypt(String name) throws Exception;
 }

@@ -4,11 +4,7 @@ import accounts.Account;
 import accounts.RootAccount;
 import authenticator.Authenticator;
 import authenticator.AuthenticatorClass;
-import exceptions.AccountLoggedIn;
-import exceptions.NotLockedAccount;
-import exceptions.UndefinedAccount;
 
-import javax.naming.AuthenticationException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -84,7 +80,7 @@ public class DeleteServlet extends HttpServlet {
             else
             {
                 auth.DeleteAccount(username);
-                out.println("Account successfully created!");
+                out.println("Account successfully deleted!");
             }
         } catch (Exception e)
         {

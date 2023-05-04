@@ -9,7 +9,7 @@ public abstract class AccountClass implements Account, AccountWrite{
     private static final String ALGO = "AES";
     private static final byte[] keyValue = new byte[] { 'F', 'C', 'T', '/', 'U', 'N', 'L', 'r',
             'o', 'c', 'k','s', '!', '!', 'd', 'i' };
-    private Key key = new SecretKeySpec(keyValue, ALGO);
+    private final Key key = new SecretKeySpec(keyValue, ALGO);
 
     private String name;
     private String hash;
@@ -38,7 +38,7 @@ public abstract class AccountClass implements Account, AccountWrite{
     private String GetHashFromPwd(String password) {
         try
         {
-            return encrypt(password);
+            return Encrypt(password);
         } catch (Exception e)
         {
             return null;
@@ -91,7 +91,7 @@ public abstract class AccountClass implements Account, AccountWrite{
         return this.hash.equals(hash);
     }
 
-    private String encrypt(String Data) throws Exception {
+    public String Encrypt(String Data) throws Exception {
         Cipher c = Cipher.getInstance(ALGO);
         c.init(Cipher.ENCRYPT_MODE, key);
         byte[] encVal = c.doFinal(Data.getBytes());

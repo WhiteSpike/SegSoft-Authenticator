@@ -3,7 +3,6 @@ package authenticator;
 import accounts.Account;
 import exceptions.*;
 
-import javax.naming.AuthenticationException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -46,7 +45,7 @@ public interface Authenticator {
      * @throws UndefinedAccount if there isn't an account with given name
      * @throws Forbidden if pwd1 does not match to pwd2
      */
-    void ChangePassword(String name, String pwd1, String pwd2) throws UndefinedAccount, Forbidden;
+    void ChangePassword(String name, String pwd0, String pwd1, String pwd2) throws UndefinedAccount, Forbidden, Exception;
 
     /**
      * Authenticates the user with given name
@@ -64,7 +63,7 @@ public interface Authenticator {
      * @param userAccount Account that is currently authenticated
      * @throws AccountNotLoggedIn if the account is already not authenticated
      */
-    void Logout(Account userAccount) throws AccountNotLoggedIn, UndefinedAccount;
+    void Logout(Account userAccount, HttpServletRequest request) throws AccountNotLoggedIn, UndefinedAccount;
 
     /**
      * Checks if the session of the HTTP request is currently authenticated

@@ -1,18 +1,15 @@
 package authenticator;
 
-import accounts.Account;
-import accounts.AccountWrite;
-import accounts.RootAccount;
-import accounts.UserAccount;
+import accounts.*;
 import exceptions.*;
+import io.jsonwebtoken.Claims;
+import jwt.JwtUtil;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.*;
+import java.util.Date;
 import java.util.logging.Logger;
 
 public class AuthenticatorClass implements Authenticator{
@@ -109,11 +106,11 @@ public class AuthenticatorClass implements Authenticator{
     }
 
     @Override
-    public void ChangePassword(String name, String pwd1, String pwd2) throws UndefinedAccount, Forbidden {
+    public void ChangePassword(String name, String pwd0, String pwd1, String pwd2) throws Exception {
         logger.info("Received 'Change Password' request for name: " + name);
         Account account = GetAccount(name);
-
         if (account == null) throw new UndefinedAccount();
+        if (!account.Encrypt(pwd0).equals(account.GetAccountHash())) throw new AuthenticationError();
         if (!pwd1.equals(pwd2)) throw new Forbidden();
 
         AccountWrite accountWrite = (AccountWrite) account;
@@ -141,7 +138,7 @@ public class AuthenticatorClass implements Authenticator{
     }
 
     @Override
-    public void Logout(Account account) throws UndefinedAccount, AccountNotLoggedIn {
+    public void Logout(Account account, HttpServletRequest request) throws UndefinedAccount, AccountNotLoggedIn {
         logger.info("Received 'Log Out' request.");
         if (account == null) throw new UndefinedAccount();
         if (!account.isLoggedIn()) throw new AccountNotLoggedIn();
@@ -150,20 +147,37 @@ public class AuthenticatorClass implements Authenticator{
         accountWrite.SetIsLoggedIn(false);
 
         WriteAccountToFile(accountWrite);
+
+        request.getSession().invalidate();
     }
 
     @Override
     public Account CheckAuthenticatedRequest(HttpServletRequest request, HttpServletResponse response) throws AuthenticationError {
         logger.info("Received 'Check Authenticated Request' request.");
         // Get the parameters from the http session
-        String JWT = request.getParameter("JWT");
+
+        String jwt = (String) request.getSession().getAttribute("jwt"); // get session instead of get parameter
         // Plan is JWT contains username and expire date
-        String name = null; // TODO Get name from JWT after validating it
-        // (Optional) Check if token expired
+
+        Claims claims = JwtUtil.parseJWT(jwt);
+        String name = claims.getId();
+        String type = claims.getIssuer(); // it's called issuer because there is no "type" in jwt but its used here to
+        // simplify the process of access level recognition
+
+        // Check if token expired
+        Date now = new Date();
+        if (now.after(claims.getExpiration())) {
+            return null;
+        } else {
+            // Token is still valid
+        }
+
         // (Optional) One time use token
         // Look for account with name
         Account account = GetAccount(name);
         if (account == null || !account.isLoggedIn()) throw new AuthenticationError();
         return account;
     }
+
+
 }

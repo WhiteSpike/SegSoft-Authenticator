@@ -1,13 +1,9 @@
 package servlets;
 
 import accounts.Account;
-import accounts.RootAccount;
 import authenticator.Authenticator;
 import authenticator.AuthenticatorClass;
-import exceptions.Forbidden;
-import exceptions.UndefinedAccount;
 
-import javax.naming.AuthenticationException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -70,7 +66,7 @@ public class ChangePasswordServlet extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest request,
                       HttpServletResponse response)
-            throws ServletException, IOException {
+            throws IOException {
         String username = request.getParameter("username");
         String oldPassword = request.getParameter("oldPassword");
         String newPassword = request.getParameter("newPassword");
@@ -111,8 +107,8 @@ public class ChangePasswordServlet extends HttpServlet {
                 out.println("<p>Current user does not have permission to execute this operation</p>");
             else
             {
-                auth.ChangePassword(username, newPassword, confirmPassword);
-                out.println("Account successfully created!");
+                auth.ChangePassword(username, oldPassword, newPassword, confirmPassword);
+                out.println("Password successfully changed!");
             }
         } catch (Exception e)
         {
