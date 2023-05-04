@@ -131,7 +131,7 @@ public class RegisterServlet extends HttpServlet {
             }
         } catch (Exception e)
         {
-            out.println(e.getMessage());
+            out.println("<p>There is no user currently logged in</p>");
         }
         out.println("<br>");
         out.println("<br>");

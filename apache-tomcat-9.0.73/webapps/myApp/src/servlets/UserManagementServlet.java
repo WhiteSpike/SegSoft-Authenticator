@@ -43,12 +43,16 @@ public class UserManagementServlet extends HttpServlet {
                 "<p>\n" +
                 "<h3>User Management Operations:</H3>\n" +
                 "<p></p>\n" +
-                "<ul>\n" +
-                "<li><a href=\"Counter\">The Counter App!</a></li>\n" +
-                "<li><a href=\"UserManagement/login\">Login</a></li>\n" +
-                "<li><a href=\"UserManagement/register\">Create Account</a></li>\n" +
-                "<li><a href=\"UserManagement/delete\">Delete Account</a></li>\n" +
-                "<li><a href=\"UserManagement/ChangePassword\">Change Password</a></li>\n");
+                "<ul>\n");
+        if(request.getSession().getAttribute("jwt") != null){
+            out.println("<li><a href=\"Counter\">The Counter App!</a></li>\n" +
+                    "<li><a href=\"UserManagement/register\">Create Account</a></li>\n" +
+                    "<li><a href=\"UserManagement/delete\">Delete Account</a></li>\n" +
+                    "<li><a href=\"UserManagement/ChangePassword\">Change Password</a></li>\n");
+        }
+        else {
+            out.println("<li><a href=\"UserManagement/login\">Login</a></li>\n");
+        }
 
            if(request.getSession().getAttribute("jwt") != null) {
                out.println("<form method=\"POST\" action=\"UserManagement\">\n" +

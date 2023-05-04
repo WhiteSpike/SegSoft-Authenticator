@@ -3,17 +3,15 @@ package servlets;
 import accounts.Account;
 import authenticator.Authenticator;
 import authenticator.AuthenticatorClass;
-import exceptions.AuthenticationError;
-import exceptions.LockedAccount;
-import exceptions.UndefinedAccount;
 import jwt.JwtUtil;
 
-import io.jsonwebtoken.*;
-
-import javax.servlet.*;
-import javax.servlet.http.*;
-import java.io.*;
-import java.util.*;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  * Servlet designed for the url "UserManagement/login" where the user can authenticate their account by inserting their accout name

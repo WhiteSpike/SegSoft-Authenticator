@@ -2,13 +2,10 @@ package jwt;
 
 import io.jsonwebtoken.*;
 
-import java.security.Key;
-import java.util.Date;
-
 import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
-
-import static java.lang.System.out;
+import java.security.Key;
+import java.util.Date;
 
 public class JwtUtil {
 
@@ -44,12 +41,11 @@ public class JwtUtil {
 
     public static Claims parseJWT(String jwt) {
         try {
-            Claims claims = Jwts.parser()
+
+            return Jwts.parser()
                     .setSigningKey(DatatypeConverter.parseBase64Binary(SECRET_KEY))
                     .parseClaimsJws(jwt)
                     .getBody();
-
-            return claims;
         } catch (JwtException e) {
             e.printStackTrace();
         }

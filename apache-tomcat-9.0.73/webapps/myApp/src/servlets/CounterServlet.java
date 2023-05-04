@@ -1,14 +1,16 @@
 package servlets;
 
 import accounts.Account;
-import accounts.RootAccount;
 import authenticator.Authenticator;
 import authenticator.AuthenticatorClass;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
-import java.io.*;
-import java.util.*;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 public class CounterServlet extends HttpServlet {
 
@@ -71,7 +73,7 @@ public class CounterServlet extends HttpServlet {
          }
      } catch (Exception e)
      {
-         out.println(e.getMessage());
+         out.println("<p>There is no user currently logged in</p>");
      }
      out.println("<H1>Value="+counter+"</H1>");
      out.print("<form action=\"");

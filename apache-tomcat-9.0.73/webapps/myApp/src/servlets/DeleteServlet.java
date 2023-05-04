@@ -4,11 +4,7 @@ import accounts.Account;
 import accounts.RootAccount;
 import authenticator.Authenticator;
 import authenticator.AuthenticatorClass;
-import exceptions.AccountLoggedIn;
-import exceptions.NotLockedAccount;
-import exceptions.UndefinedAccount;
 
-import javax.naming.AuthenticationException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -74,8 +70,6 @@ public class DeleteServlet extends HttpServlet {
         out.println("<input type=“text\" size=35 name=\"username\" required>");
         out.println("<br>");
         out.println("<input type=\"submit\" value=\"Delete Account\">");
-        out.println("<br>");
-        out.println("<a href=\"../manageusers\">Back</a>");
 
         try
         {

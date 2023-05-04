@@ -111,8 +111,8 @@ public class ChangePasswordServlet extends HttpServlet {
                 out.println("<p>Current user does not have permission to execute this operation</p>");
             else
             {
-                auth.ChangePassword(username, newPassword, confirmPassword);
-                out.println("Account successfully created!");
+                auth.ChangePassword(username, oldPassword, newPassword, confirmPassword);
+                out.println("Password successfully changed!");
             }
         } catch (Exception e)
         {

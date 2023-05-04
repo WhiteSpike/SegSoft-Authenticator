@@ -1,9 +1,6 @@
 package authenticator;
 
-import accounts.Account;
-import accounts.AccountWrite;
-import accounts.RootAccount;
-import accounts.UserAccount;
+import accounts.*;
 import exceptions.*;
 import io.jsonwebtoken.Claims;
 import jwt.JwtUtil;
@@ -109,11 +106,11 @@ public class AuthenticatorClass implements Authenticator{
     }
 
     @Override
-    public void ChangePassword(String name, String pwd1, String pwd2) throws UndefinedAccount, Forbidden {
+    public void ChangePassword(String name, String pwd0, String pwd1, String pwd2) throws Exception {
         logger.info("Received 'Change Password' request for name: " + name);
         Account account = GetAccount(name);
-
         if (account == null) throw new UndefinedAccount();
+        if (!account.Encrypt(pwd0).equals(account.GetAccountHash())) throw new AuthenticationError();
         if (!pwd1.equals(pwd2)) throw new Forbidden();
 
         AccountWrite accountWrite = (AccountWrite) account;
