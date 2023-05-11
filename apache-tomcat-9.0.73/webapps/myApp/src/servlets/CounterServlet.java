@@ -3,6 +3,7 @@ package servlets;
 import accounts.Account;
 import authenticator.Authenticator;
 import authenticator.AuthenticatorClass;
+import exceptions.AuthenticationError;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -34,6 +35,19 @@ public class CounterServlet extends HttpServlet {
   HttpServletResponse response) 
   throws ServletException, IOException
 {
+    try
+    {
+        auth.CheckAuthenticatedRequest(request, response);
+    } catch (AuthenticationError authenticationError) {
+        PrintWriter out = response.getWriter();
+        out.println("<HTML>");
+        out.println("<HEAD>");
+        out.println("</HEAD>");
+        out.println("<BODY>");
+        out.println("<a href=\"../UserManagement\">Back</a>");
+        out.println("</BODY>");
+        out.println("</HTML>");
+    }
   PrintWriter out = response.getWriter();
   out.println("<HTML>");
   out.println("<HEAD>");
