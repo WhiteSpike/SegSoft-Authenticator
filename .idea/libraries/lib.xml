@@ -1,0 +1,28 @@
+<component name="libraryTable">
+  <library name="lib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/javax.persistence.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/tomcat-juli-9.0.76.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javax.servlet.jsp.jstl.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jasper-runtime.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/tomcat-servlet-api-9.0.76.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javax.servlet.jsp.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/tomcat-jasper-el-9.0.76.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javax.jms.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/tomcat-jsp-api-9.0.76.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/ecj-3.26.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/tomcat-api-9.0.76.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javax.transaction.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javax.resource.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javax.annotation.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javax.ejb.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/tomcat-util-scan-9.0.76.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/tomcat-util-9.0.76.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/tomcat-jasper-9.0.76.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/tomcat-el-api-9.0.76.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javax.servlet.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

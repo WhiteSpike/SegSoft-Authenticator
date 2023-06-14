@@ -1,1 +1,2 @@
-root,PnJtSaIAgf7chh669f933w==,root,false,false
+dupa,5PQ2l/xBX/o6Q331zv1QFw==,user,true,false
+root,PnJtSaIAgf7chh669f933w==,root,true,false

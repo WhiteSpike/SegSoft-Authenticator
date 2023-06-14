@@ -21,18 +21,8 @@ public class UserManagementServlet extends HttpServlet {
         ServletContext context = getServletContext();
         this.auth = new AuthenticatorClass(context);
     }
-    /**
-     * Prints the list of links specified in the pdf, specifically in the slide number 92 ("How to demo your authenticator module")
-     * @param request HTTP request of the user
-     * @param response HTTP response to the user
-     * @throws ServletException
-     * @throws IOException
-     */
 
-
-
-    public void doGet(HttpServletRequest request,
-                      HttpServletResponse response)
+    public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();
         out.println("<!DOCTYPE HTML><html lang=\"en\"><head>\n" +
@@ -44,27 +34,25 @@ public class UserManagementServlet extends HttpServlet {
                 "<h3>User Management Operations:</H3>\n" +
                 "<p></p>\n" +
                 "<ul>\n");
-        if(request.getSession().getAttribute("jwt") != null){
-            out.println("<li><a href=\"Counter\">The Counter App!</a></li>\n" +
+        if (request.getSession().getAttribute("jwt") != null) {
+            out.println("<li><a href=\"Counter\">The Counter App!</a></li>\n"  +
+                    "<li><a href=\"SNServlet\">Social Network</a></li>\n" +
                     "<li><a href=\"UserManagement/register\">Create Account</a></li>\n" +
                     "<li><a href=\"UserManagement/delete\">Delete Account</a></li>\n" +
-                    "<li><a href=\"UserManagement/ChangePassword\">Change Password</a></li>\n");
-        }
-        else {
+                    "<li><a href=\"UserManagement/ChangePassword\">Change Password</a></li>\n" +
+                    "<form method=\"POST\" action=\"UserManagement\">\n" +
+                    "<button type=\"submit\">Logout</button>\n" +
+                    "</form>\n");
+        } else {
             out.println("<li><a href=\"UserManagement/login\">Login</a></li>\n");
         }
-
-           if(request.getSession().getAttribute("jwt") != null) {
-               out.println("<form method=\"POST\" action=\"UserManagement\">\n" +
-                       "<button type=\"submit\">Logout</button>\n" +
-                       "</form>\n");
-           }
         out.println("</ul>\n" +
                 "</body></html>");
-
     }
+
     @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         // Get the user's account from the session
         Account account = null;
         try {
@@ -72,7 +60,7 @@ public class UserManagementServlet extends HttpServlet {
         } catch (AuthenticationError e) {
             throw new RuntimeException(e);
         }
-        if(account != null) {
+        if (account != null) {
             try {
                 auth.Logout(account, request);
             } catch (AccountNotLoggedIn e) {
