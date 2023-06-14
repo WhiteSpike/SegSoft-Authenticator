@@ -1,95 +1,96 @@
-//package servlets;
-//
-//
-//import javax.servlet.*;
-//import javax.servlet.http.*;
-//import java.io.IOException;
-//
-//public class SNServlet extends HttpServlet {
-//
-//    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        // Extract the requested URL to determine the action
-//        String requestURL = request.getRequestURI();
-//
-//        // Dispatch the request to the appropriate servlet based on the requested URL
-//        if (requestURL.contains("/pages")) {
-//            PagesServlet pagesServlet = new PagesServlet();
-//            pagesServlet.doGet(request, response);
-//        } else if (requestURL.contains("/follow-requests")) {
-//            FollowRequestsServlet followRequestsServlet = new FollowRequestsServlet();
-//            followRequestsServlet.doGet(request, response);
-//        } else if (requestURL.contains("/posts")) {
-//            PostsServlet postsServlet = new PostsServlet();
-//            postsServlet.doGet(request, response);
-//        } else if (requestURL.contains("/delete-post")) {
-//            DeletePostServlet deletePostServlet = new DeletePostServlet();
-//            deletePostServlet.doGet(request, response);
-//        } else if (requestURL.contains("/like-post")) {
-//            LikePostServlet likePostServlet = new LikePostServlet();
-//            likePostServlet.doGet(request, response);
-//        } else if (requestURL.contains("/admin")) {
-//            AdminServlet adminServlet = new AdminServlet();
-//            adminServlet.doGet(request, response);
-//        } else {
-//            // Handle invalid or unrecognized requests
-//            response.sendError(HttpServletResponse.SC_NOT_FOUND);
-//        }
-//    }
-//
-//    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        // Extract the requested URL to determine the action
-//        String requestURL = request.getRequestURI();
-//
-//        // Dispatch the request to the appropriate servlet based on the requested URL
-//        if (requestURL.contains("/pages")) {
-//            PagesServlet pagesServlet = new PagesServlet();
-//            pagesServlet.doPost(request, response);
-//        } else if (requestURL.contains("/follow-requests")) {
-//            FollowRequestsServlet followRequestsServlet = new FollowRequestsServlet();
-//            followRequestsServlet.doPost(request, response);
-//        } else if (requestURL.contains("/posts")) {
-//            PostsServlet postsServlet = new PostsServlet();
-//            postsServlet.doPost(request, response);
-//        } else if (requestURL.contains("/delete-post")) {
-//            DeletePostServlet deletePostServlet = new DeletePostServlet();
-//            deletePostServlet.doPost(request, response);
-//        } else if (requestURL.contains("/like-post")) {
-//            LikePostServlet likePostServlet = new LikePostServlet();
-//            likePostServlet.doPost(request, response);
-//        } else if (requestURL.contains("/admin")) {
-//            AdminServlet adminServlet = new AdminServlet();
-//            adminServlet.doPost(request, response);
-//        } else {
-//            // Handle invalid or unrecognized requests
-//            response.sendError(HttpServletResponse.SC_NOT_FOUND);
-//        }
-//    }
-//
-//    protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        // Extract the requested URL to determine the action
-//        String requestURL = request.getRequestURI();
-//
-//        // Dispatch the request to the appropriate servlet based on the requested URL
-//        if (requestURL.contains("/follow-requests")) {
-//            FollowRequestsServlet followRequestsServlet = new FollowRequestsServlet();
-//            followRequestsServlet.doPut(request, response);
-//        } else {
-//            // Handle invalid or unrecognized requests
-//            response.sendError(HttpServletResponse.SC_NOT_FOUND);
-//        }
-//    }
-//
-//    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        // Extract the requested URL to determine the action
-//        String requestURL = request.getRequestURI();
-//
-//        // Dispatch the request to the appropriate servlet based on the requested URL
-//        if (requestURL.contains("/delete-post")) {
-//            DeletePostServlet deletePostServlet = new DeletePostServlet();
-//            deletePostServlet.doDelete(request, response);
-//        } else {
-//            // Handle invalid or unrecognized requests
-//            response.sendError(HttpServletResponse.SC_NOT_FOUND);
-//        }
-//    }
-//}
+package servlets;
+
+import accounts.Account;
+import authenticator.Authenticator;
+import authenticator.AuthenticatorClass;
+import jwt.JwtUtil;
+
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+public class SNServlet extends HttpServlet {
+
+    private Authenticator auth;
+
+    @Override
+    public void init() throws ServletException {
+        ServletContext context = getServletContext();
+        this.auth = new AuthenticatorClass(context);
+    }
+
+    @Override
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        PrintWriter out = response.getWriter();
+        out.println("<html>");
+        out.println("<head>");
+        out.println("</head>");
+        out.println("<body>");
+        out.println("<h1>Welcome to the Social Network</h1>");
+        out.println("<form name=\"postform\"");
+        out.println("action=\"post\" method=\"POST\">");
+        out.println("<label for=\"message\">Message:</label>");
+        out.println("<br>");
+        out.println("<input type=\"text\" name=\"message\" required>");
+        out.println("<br>");
+        out.println("<input type=\"submit\" value=\"Post\">");
+        out.println("</form>");
+        out.println("<br>");
+        out.println("<form name=\"followform\"");
+        out.println("action=\"follow\" method=\"POST\">");
+        out.println("<label for=\"username\">Username:</label>");
+        out.println("<br>");
+        out.println("<input type=\"text\" name=\"username\" required>");
+        out.println("<br>");
+        out.println("<input type=\"submit\" value=\"Follow\">");
+        out.println("</form>");
+        out.println("</body>");
+        out.println("</html>");
+    }
+
+    @Override
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String message = request.getParameter("message");
+        String username = request.getParameter("username");
+        PrintWriter out = response.getWriter();
+        out.println("<html>");
+        out.println("<head>");
+        out.println("</head>");
+        out.println("<body>");
+
+        try {
+            // Handle post request
+            handlePost(message);
+            out.println("<p>Post successfully created!</p>");
+        } catch (Exception e) {
+            out.println("<p>An error occurred while creating the post.</p>");
+            out.println("<p>Error message: " + e.getMessage() + "</p>");
+        }
+
+        try {
+            // Handle follow request
+            handleFollowRequest(username);
+            out.println("<p>You are now following " + username + ".</p>");
+        } catch (Exception e) {
+            out.println("<p>An error occurred while following the user.</p>");
+            out.println("<p>Error message: " + e.getMessage() + "</p>");
+        }
+
+        out.println("<br>");
+        out.println("<a href=\"../UserManagement\">Back</a>");
+        out.println("</body>");
+        out.println("</html>");
+    }
+
+    private void handlePost(String message) {
+        // Logic to handle post creation
+    }
+
+    private void handleFollowRequest(String username) {
+        // Logic to handle follow request
+    }
+}

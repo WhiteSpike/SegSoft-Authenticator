@@ -36,7 +36,7 @@ public class UserManagementServlet extends HttpServlet {
                 "<ul>\n");
         if (request.getSession().getAttribute("jwt") != null) {
             out.println("<li><a href=\"Counter\">The Counter App!</a></li>\n"  +
-                    "<li><a href=\"SNServlet\">Social Network</a></li>\n" +
+                    "<li><a href=\"SocialNetwork/SNServlet\">Social Network</a></li>\n" +
                     "<li><a href=\"UserManagement/register\">Create Account</a></li>\n" +
                     "<li><a href=\"UserManagement/delete\">Delete Account</a></li>\n" +
                     "<li><a href=\"UserManagement/ChangePassword\">Change Password</a></li>\n" +
