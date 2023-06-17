@@ -48,6 +48,15 @@ public class SNServlet extends HttpServlet {
         out.println("<br>");
         out.println("<input type=\"submit\" value=\"Follow\">");
         out.println("</form>");
+        out.println("<br>");
+        out.println("<form name=\"viewpostsform\"");
+        out.println("action=\"viewposts\" method=\"POST\">");
+        out.println("<label for=\"username\">View this user posts:</label>");
+        out.println("<br>");
+        out.println("<input type=\"text\" name=\"username\" required>");
+        out.println("<br>");
+        out.println("<input type=\"submit\" value=\"ViewUser\">");
+        out.println("</form>");
         out.println("</body>");
         out.println("</html>");
     }
@@ -80,6 +89,15 @@ public class SNServlet extends HttpServlet {
             out.println("<p>Error message: " + e.getMessage() + "</p>");
         }
 
+        try {
+            // Handle view posts
+            handleViewPostsRequest(username);
+            out.println("<p>You are now viewing " + username + "posts.</p>");
+        } catch (Exception e) {
+            out.println("<p>An error occurred while viewing the posts of "+ username +".</p>");
+            out.println("<p>Error message: " + e.getMessage() + "</p>");
+        }
+
         out.println("<br>");
         out.println("<a href=\"../UserManagement\">Back</a>");
         out.println("</body>");
@@ -91,6 +109,9 @@ public class SNServlet extends HttpServlet {
     }
 
     private void handleFollowRequest(String username) {
+        // Logic to handle follow request
+    }
+    private void handleViewPostsRequest(String username) {
         // Logic to handle follow request
     }
 }
