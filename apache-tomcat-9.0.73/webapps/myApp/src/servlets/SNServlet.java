@@ -33,7 +33,7 @@ public class SNServlet extends HttpServlet {
         out.println("<h1>Welcome to the Social Network</h1>");
         out.println("<form name=\"postform\"");
         out.println("action=\"post\" method=\"POST\">");
-        out.println("<label for=\"message\">Message:</label>");
+        out.println("<label for=\"message\">Make a post:</label>");
         out.println("<br>");
         out.println("<input type=\"text\" name=\"message\" required>");
         out.println("<br>");
@@ -42,7 +42,7 @@ public class SNServlet extends HttpServlet {
         out.println("<br>");
         out.println("<form name=\"followform\"");
         out.println("action=\"follow\" method=\"POST\">");
-        out.println("<label for=\"username\">Username:</label>");
+        out.println("<label for=\"username\">Follow this user:</label>");
         out.println("<br>");
         out.println("<input type=\"text\" name=\"username\" required>");
         out.println("<br>");
