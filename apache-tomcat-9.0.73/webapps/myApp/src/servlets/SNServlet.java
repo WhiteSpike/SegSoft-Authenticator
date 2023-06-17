@@ -3,7 +3,10 @@ package servlets;
 import accounts.Account;
 import authenticator.Authenticator;
 import authenticator.AuthenticatorClass;
+import exceptions.AuthenticationError;
 import jwt.JwtUtil;
+import socialNetwork.FState;
+import socialNetwork.SN;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -12,10 +15,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 
 public class SNServlet extends HttpServlet {
 
     private Authenticator auth;
+    private SN sn;
 
     @Override
     public void init() throws ServletException {
@@ -23,6 +28,11 @@ public class SNServlet extends HttpServlet {
         this.auth = new AuthenticatorClass(context);
     }
 
+    public void init(SN socialNetwork) throws ServletException {
+        ServletContext context = getServletContext();
+        this.auth = new AuthenticatorClass(context);
+        this.sn = socialNetwork;
+    }
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter out = response.getWriter();
@@ -82,7 +92,7 @@ public class SNServlet extends HttpServlet {
 
         try {
             // Handle follow request
-            handleFollowRequest(username);
+            handleFollowRequest(username, request, response);
             out.println("<p>You are now following " + username + ".</p>");
         } catch (Exception e) {
             out.println("<p>An error occurred while following the user.</p>");
@@ -108,7 +118,14 @@ public class SNServlet extends HttpServlet {
         // Logic to handle post creation
     }
 
-    private void handleFollowRequest(String username) {
+    private void handleFollowRequest(String username, HttpServletRequest request, HttpServletResponse response) {
+        try {
+            sn.follows(Integer.parseInt(auth.CheckAuthenticatedRequest(request, response).GetAccountName()), Integer.parseInt(username), FState.PENDING);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (AuthenticationError e) {
+            throw new RuntimeException(e);
+        }
         // Logic to handle follow request
     }
     private void handleViewPostsRequest(String username) {
