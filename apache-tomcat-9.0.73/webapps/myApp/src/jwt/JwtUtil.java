@@ -1,5 +1,8 @@
 package jwt;
 
+import accessControl.AccessControllerClass;
+import accessControl.Permission;
+import accessControl.Role;
 import io.jsonwebtoken.*;
 
 import javax.crypto.spec.SecretKeySpec;
@@ -34,7 +37,37 @@ public class JwtUtil {
                     .setIssuedAt(now)
                     .setExpiration(expiration)
                     .claim("isAdmin", isAdmin)
-                    .claim("authorizedResources", getAuthorizedResources(isAdmin))
+                    .signWith(signatureAlgorithm, signingKey);
+
+            System.out.println("JWT created successfully");
+            return builder.compact();
+
+        } catch (Exception e) {
+            System.out.println("Error creating JWT: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+    public String createJWT(String name, List<Permission> permissions) {
+        System.out.println("Creating Capabilities for " + name);
+        try {
+            Date now = new Date();
+            Date expiration = new Date(now.getTime() + EXPIRATION_TIME);
+
+            // The JWT signature algorithm we will be using to sign the token
+            SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
+
+            // We will sign our JWT with our Secret Key
+            byte[] secretKeyBytes = DatatypeConverter.parseBase64Binary(SECRET_KEY);
+            Key signingKey = new SecretKeySpec(secretKeyBytes, signatureAlgorithm.getJcaName());
+
+            // Let's set the JWT Claims
+            JwtBuilder builder = Jwts.builder()
+                    .setId(name)
+                    .setIssuedAt(now)
+                    .setExpiration(expiration)
+                    .claim("permissions", permissions)
                     .signWith(signatureAlgorithm, signingKey);
 
             System.out.println("JWT created successfully");
@@ -48,23 +81,6 @@ public class JwtUtil {
         return null;
     }
 
-    private List<String> getAuthorizedResources(boolean isAdmin) {
-        List<String> authorizedResources = new ArrayList<>();
-
-        // Add common authorized resources for all authors
-        authorizedResources.add("access_all_pages");
-        authorizedResources.add("submit_follow_requests");
-        authorizedResources.add("like_posts");
-
-        if (isAdmin) {
-            // Add admin-specific authorized resources
-            authorizedResources.add("create_pages");
-            authorizedResources.add("delete_pages");
-        }
-
-        return authorizedResources;
-    }
-
     public static Claims parseJWT(String jwt) {
         try {
             return Jwts.parser()
@@ -75,14 +91,6 @@ public class JwtUtil {
             e.printStackTrace();
         }
         return null;
-    }
-
-    public static boolean hasAccessToResource(Claims claims, String resource) {
-        // Retrieve the list of resources from the JWT claims
-        List<String> resources = claims.get("resources", List.class);
-
-        // Check if the given resource is present in the list of resources
-        return resources != null && resources.contains(resource);
     }
 
 }

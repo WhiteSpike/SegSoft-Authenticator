@@ -158,9 +158,9 @@ public class SN {
                 " where post_id="+p.getPostId());
     }
 
-    public void deletePost(PostObject p) throws SQLException {
-        stmt.execute("delete from post where post_id="+p.getPostId());
-        stmt.execute("delete from likes where post_id="+p.getPostId());
+    public void deletePost(int post_id) throws SQLException {
+        stmt.execute("delete from post where post_id="+post_id);
+        stmt.execute("delete from likes where post_id="+post_id);
     }
 
     public List<PostObject> getAllPosts() throws SQLException {
@@ -222,10 +222,10 @@ public class SN {
                 "page_pic = "+q(p.getPagePic())+" where page_id="+p.getPageId());
     }
 
-    public void deletePage(PageObject p) throws SQLException {
-        stmt.execute("delete from page where page_id="+p.getPageId());
-        stmt.execute("delete from post where page_id="+p.getPageId());
-        stmt.execute("delete from likes where page_id="+p.getPageId());
+    public void deletePage(int page_id) throws SQLException {
+        stmt.execute("delete from page where page_id="+page_id);
+        stmt.execute("delete from post where page_id="+page_id);
+        stmt.execute("delete from likes where page_id="+page_id);
     }
 
     public List<PageObject> getAllPages() throws SQLException {

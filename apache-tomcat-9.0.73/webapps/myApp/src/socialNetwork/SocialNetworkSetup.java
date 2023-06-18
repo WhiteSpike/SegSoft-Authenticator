@@ -97,9 +97,9 @@ public class SocialNetworkSetup {
             System.out.println(po3.getPostText()+" liked by " + x.getUserId());
         };
 
-        app.deletePage(p);
-        app.deletePage(q);
-        app.deletePage(r);
+        app.deletePage(p.getPageId());
+        app.deletePage(q.getPageId());
+        app.deletePage(r.getPageId());
     }
 
 }
