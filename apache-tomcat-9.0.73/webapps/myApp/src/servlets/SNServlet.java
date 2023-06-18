@@ -42,30 +42,30 @@ public class SNServlet extends HttpServlet {
         out.println("<body>");
         out.println("<h1>Welcome to the Social Network</h1>");
         out.println("<form name=\"postform\"");
-        out.println("action=\"post\" method=\"POST\">");
+        out.println("action=\"SNServlet\" method=\"POST\">");
         out.println("<label for=\"message\">Make a post:</label>");
         out.println("<br>");
         out.println("<input type=\"text\" name=\"message\" required>");
         out.println("<br>");
-        out.println("<input type=\"submit\" value=\"Post\">");
+        out.println("<input type=\"submit\" name=\"post\" value=\"Post\">");
         out.println("</form>");
         out.println("<br>");
         out.println("<form name=\"followform\"");
-        out.println("action=\"follow\" method=\"POST\">");
+        out.println("action=\"SNServlet\" method=\"POST\">");
         out.println("<label for=\"username\">Follow this user:</label>");
         out.println("<br>");
         out.println("<input type=\"text\" name=\"username\" required>");
         out.println("<br>");
-        out.println("<input type=\"submit\" value=\"Follow\">");
+        out.println("<input type=\"submit\" name=\"follow\" value=\"Follow\">");
         out.println("</form>");
         out.println("<br>");
         out.println("<form name=\"viewpostsform\"");
-        out.println("action=\"viewposts\" method=\"POST\">");
+        out.println("action=\"SNServlet\" method=\"POST\">");
         out.println("<label for=\"username\">View this user posts:</label>");
         out.println("<br>");
         out.println("<input type=\"text\" name=\"username\" required>");
         out.println("<br>");
-        out.println("<input type=\"submit\" value=\"ViewUser\">");
+        out.println("<input type=\"submit\" name=\"viewuser\" value=\"ViewUser\">");
         out.println("</form>");
         out.println("</body>");
         out.println("</html>");
@@ -81,32 +81,40 @@ public class SNServlet extends HttpServlet {
         out.println("</head>");
         out.println("<body>");
 
-        try {
-            // Handle post request
-            handlePost(message);
-            out.println("<p>Post successfully created!</p>");
-        } catch (Exception e) {
-            out.println("<p>An error occurred while creating the post.</p>");
-            out.println("<p>Error message: " + e.getMessage() + "</p>");
+
+        if (request.getParameter("post") != null) {
+            try {
+                // Handle post request
+                handlePost(message);
+                out.println("<p>Post successfully created!</p>");
+            } catch (Exception e) {
+                out.println("<p>An error occurred while creating the post.</p>");
+                out.println("<p>Error message: " + e.getMessage() + "</p>");
+            }
+        }
+        else if (request.getParameter("follow") != null) {
+            try {
+                // Handle follow request
+                handleFollowRequest(username, request, response);
+                out.println("<p>You are now following " + username + ".</p>");
+            } catch (Exception e) {
+                out.println("<p>An error occurred while following the user.</p>");
+                out.println("<p>Error message: " + e.getMessage() + "</p>");
+            }
+        }
+        else if (request.getParameter("viewuser") != null) {
+            try {
+                // Handle view posts
+                handleViewPosts(username, request, response);
+                out.println("<p>You are now viewing " + username + "posts.</p>");
+            } catch (Exception e) {
+                out.println("<p>An error occurred while viewing the posts of "+ username +".</p>");
+                out.println("<p>Error message: " + e.getMessage() + "</p>");
+            }
         }
 
-        try {
-            // Handle follow request
-            handleFollowRequest(username, request, response);
-            out.println("<p>You are now following " + username + ".</p>");
-        } catch (Exception e) {
-            out.println("<p>An error occurred while following the user.</p>");
-            out.println("<p>Error message: " + e.getMessage() + "</p>");
-        }
 
-        try {
-            // Handle view posts
-            handleViewPostsRequest(username);
-            out.println("<p>You are now viewing " + username + "posts.</p>");
-        } catch (Exception e) {
-            out.println("<p>An error occurred while viewing the posts of "+ username +".</p>");
-            out.println("<p>Error message: " + e.getMessage() + "</p>");
-        }
+
 
         out.println("<br>");
         out.println("<a href=\"../UserManagement\">Back</a>");
@@ -126,9 +134,12 @@ public class SNServlet extends HttpServlet {
         } catch (AuthenticationError e) {
             throw new RuntimeException(e);
         }
-        // Logic to handle follow request
     }
-    private void handleViewPostsRequest(String username) {
-        // Logic to handle follow request
+    private void handleViewPosts(String username, HttpServletRequest request, HttpServletResponse response) { // request and response are for token checking
+        try {
+            sn.getPagePosts(Integer.parseInt(username));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
