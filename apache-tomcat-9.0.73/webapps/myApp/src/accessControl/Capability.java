@@ -1,10 +1,8 @@
 package accessControl;
 
+import java.util.List;
+
 public interface Capability {
 
-    /**
-     *
-     * @return Role associated with the capability
-     */
-    Role getRole();
+    List<Permission> getAuthorizedOperations();
 }

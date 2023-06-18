@@ -1,6 +1,7 @@
 package accessControl;
 
 import accounts.Account;
+import exceptions.AccessControllerDeniedException;
 
 public interface AccessController {
 
@@ -53,5 +54,5 @@ public interface AccessController {
      * @param res Resource where the role can execute the operation
      * @param op Operation which the role will be granted to execute
      */
-    void checkPermission(Capability cap, Resource res, Operation op);
+    void checkPermission(Capability cap, Resource res, Operation op) throws AccessControllerDeniedException;
 }

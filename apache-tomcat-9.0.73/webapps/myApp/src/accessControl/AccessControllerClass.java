@@ -1,6 +1,7 @@
 package accessControl;
 
 import accounts.Account;
+import exceptions.AccessControllerDeniedException;
 
 import javax.servlet.ServletContext;
 import java.io.BufferedReader;
@@ -54,15 +55,39 @@ public class AccessControllerClass implements AccessController{
 
     @Override
     public Capability makeKey(Role role) {
-        // Memory return, does not need to go to database/file
-        return new CapabilityClass(role);
+        List<Permission> authorizedOperations = GetAuthorizedOperations(role);
+        return new CapabilityClass(authorizedOperations);
+    }
+
+    private List<Permission> GetAuthorizedOperations(Role role) {
+        try {
+            List<Permission> authorizedOperations = new LinkedList<>();
+            File inFile = new File(this.filePath + "/rolePermissions.txt");
+            FileReader file = new FileReader(inFile);
+            BufferedReader in = new BufferedReader(file);
+            String line;
+            while((line = in.readLine()) != null){
+                String[] parameters = line.split(",");
+                String roleID = parameters[0];
+                String resource = parameters[1];
+                String operation = parameters[2];
+
+                if (!roleID.equals(role.getRoleID()))
+                    authorizedOperations.add(new Permission(Resource.valueOf(resource), Operation.valueOf(operation)));
+
+            }
+            in.close();
+            return authorizedOperations;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override
-    public void checkPermission(Capability cap, Resource res, Operation op) {
+    public void checkPermission(Capability cap, Resource res, Operation op) throws AccessControllerDeniedException {
         // Gets the role from the Capability and checks if it has access to a given resource and operation from the database/file "rolePermissions.txt"
-        Role role = cap.getRole();
-        checkPermissionInDatabase(role, res, op);
+        if(!cap.getAuthorizedOperations().contains(new Permission(res, op))) throw new AccessControllerDeniedException();
     }
 
     private void writeRoleIntoFile(Role role) {

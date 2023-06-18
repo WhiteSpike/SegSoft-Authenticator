@@ -1,4 +1,6 @@
 package accessControl;
 
-public interface Resource {
+public enum Resource {
+    Page,
+    Post,
 }
